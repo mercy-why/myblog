@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[终于开通博客啦]]></title>
+    <title><![CDATA[用Hexo搭建博客遇到的一些坑]]></title>
     <url>%2F2019%2F02%2F27%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. 记录一下搞了一晚上终于弄好啦112点多啦，该睡觉啦 真是麻烦呢，各种问题产生了]]></content>
+    <content type="text"><![CDATA[##绑定域名 绑定域名的时候每次都要在setting里添加Custom domain，然后会在仓库里自动添加一个CNAME文件， 奇怪的是，每次hexo d的时候，总会自动覆盖。 解决方法是在本地添加一个CNAME文件，写上域名，放进source文件夹，便不会被删除。]]></content>
   </entry>
 </search>
