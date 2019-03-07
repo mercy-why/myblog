@@ -1,0 +1,1 @@
+[{"title":"用Hexo搭建博客遇到的一些坑","url":"%2F2019%2F02%2F27%2Fhello-world%2F","content":"###绑定域名\n    绑定域名的时候每次都要在setting里添加Custom domain，然后会在仓库里自动添加一个CNAME文件，\n    奇怪的是，每次hexo d的时候，总会自动覆盖。\n    解决方法是在本地添加一个CNAME文件，写上域名，放进source文件夹，便不会被删除。\n\n\n"}]

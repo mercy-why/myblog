@@ -11,7 +11,7 @@
 
     <title>
         
-        用Hexo搭建博客遇到的一些坑 - 码鹿的网络日志
+        about - 码鹿的网络日志
         
     </title>
 
@@ -71,7 +71,7 @@
                     <span>存档</span>
                 </a>
             </li>
-            <li>
+            <li class="active">
                 <a href="/about/">
                     <i class="iconfont icon-guanyu2"></i>
                     <span>关于</span>
@@ -87,10 +87,6 @@
             
         </ul>
     </div>
-    
-        <div id="toc" class="toc-article">
-    
-</div>
     
 </div>
 
@@ -115,33 +111,12 @@
     <div class="index-middle">
         <!-- Main Content -->
         
-
-
-<div class="post-container">
-    <div class="post-title">
-        用Hexo搭建博客遇到的一些坑
+<div class="post-content ">
+    
+    
+    <div id="comment-container">
     </div>
-
-    <div class="post-meta">
-        <span class="attr">发布于：<span>2019-02-27 21:42:58</span></span>
-        
-        
-        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
-</span>
-
-    </div>
-    <div class="post-content ">
-        <p>###绑定域名<br>    绑定域名的时候每次都要在setting里添加Custom domain，然后会在仓库里自动添加一个CNAME文件，<br>    奇怪的是，每次hexo d的时候，总会自动覆盖。<br>    解决方法是在本地添加一个CNAME文件，写上域名，放进source文件夹，便不会被删除。</p>
-
-        
-        <br>
-        <div id="comment-container">
-        </div>
-        <div id="disqus_thread"></div>
-
-        <div id="lv-container">
-        </div>
-
+    <div id="lv-container">
     </div>
 </div>
 
@@ -191,7 +166,7 @@
     // We expose some of the variables needed by the front end
     window.hexo_search_path = "search.json"
     window.hexo_root = "/"
-    window.isPost = true
+    window.isPost = false
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
