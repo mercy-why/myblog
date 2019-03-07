@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#绑定域名"><span class="toc-text">绑定域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署到github"><span class="toc-text">部署到github</span></a></li></ol>
 </div>
     
 </div>
@@ -131,8 +131,12 @@
 
     </div>
     <div class="post-content ">
-        <p>###绑定域名<br>    绑定域名的时候每次都要在setting里添加Custom domain，然后会在仓库里自动添加一个CNAME文件，<br>    奇怪的是，每次hexo d的时候，总会自动覆盖。<br>    解决方法是在本地添加一个CNAME文件，写上域名，放进source文件夹，便不会被删除。</p>
-
+        <h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><pre><code>绑定域名的时候每次都要在setting里添加Custom domain，然后会在仓库里自动添加一个CNAME文件，
+奇怪的是，每次hexo d的时候，总会自动覆盖。
+解决方法是在本地添加一个CNAME文件，写上域名，放进source文件夹，便不会被删除。
+</code></pre><h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><pre><code>部署到github上时，总是传不上去，后来发现要先hexo g 再hexo d才行，hexo g的目的是生成静态文件。
+也可以hexo d -g
+</code></pre>
         
         <br>
         <div id="comment-container">
@@ -172,14 +176,6 @@
 
     </ul>
     
-    <p>
-        <span id="busuanzi_container_site_pv">
-            <span id="busuanzi_value_site_pv"></span>PV
-        </span>
-        <span id="busuanzi_container_site_uv">
-            <span id="busuanzi_value_site_uv"></span>UV
-        </span>
-        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
 </footer>
 
 
