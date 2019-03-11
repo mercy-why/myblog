@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、双向绑定表单"><span class="toc-text">一、双向绑定表单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、阻止默认提交"><span class="toc-text">二、阻止默认提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、创建一个formData对象实例"><span class="toc-text">三、创建一个formData对象实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、把表单里的数据添加进去"><span class="toc-text">四、把表单里的数据添加进去</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、发送数据到后台"><span class="toc-text">五、发送数据到后台</span></a></li></ol>
 </div>
     
 </div>
@@ -140,7 +140,12 @@
 
     </div>
     <div class="post-content ">
-        <p>antd中的Upload组件是选择文件后立即上传，项目需求为点击保存按钮后一起上传。<br>暂未解决，下周去尝试。</p>
+        <p><i>antd里的upload组件，默认是选择文件后立即上传文件。如何改成点击保存后，和表单一起上传到一个地址呢？</i></p>
+<h3 id="一、双向绑定表单"><a href="#一、双向绑定表单" class="headerlink" title="一、双向绑定表单"></a>一、双向绑定表单</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> &lt;Form.Item label=<span class="string">"file"</span>&gt;</span><br><span class="line">    &#123;getFieldDecorator(<span class="string">'file'</span>, &#123;</span><br><span class="line">        rules: [&#123;<span class="attr">required</span>: <span class="literal">true</span>&#125;]</span><br><span class="line">            &#125;)(</span><br><span class="line">            &lt;Upload beforeUpload=&#123;beforeUpload&#125;&gt;</span><br><span class="line">                &lt;Button&gt;</span><br><span class="line">                &lt;Icon type=<span class="string">"upload"</span> /&gt; Click to Upload</span><br><span class="line">                &lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>Upload&gt;,</span><br><span class="line">          )&#125;</span><br><span class="line">&lt;<span class="regexp">/Form.Item&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="二、阻止默认提交"><a href="#二、阻止默认提交" class="headerlink" title="二、阻止默认提交"></a>二、阻止默认提交</h3><p>beforeUpload 返回 false 后，可以手动上传文件。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> beforeUpload = <span class="function">(<span class="params">file</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></p>
+<h3 id="三、创建一个formData对象实例"><a href="#三、创建一个formData对象实例" class="headerlink" title="三、创建一个formData对象实例"></a>三、创建一个formData对象实例</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> formData = <span class="keyword">new</span> FormData();</span><br></pre></td></tr></table></figure>
+<h3 id="四、把表单里的数据添加进去"><a href="#四、把表单里的数据添加进去" class="headerlink" title="四、把表单里的数据添加进去"></a>四、把表单里的数据添加进去</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> data = props.form.getFieldsValue();</span><br><span class="line">formData.append(<span class="string">'file'</span>,data.file);</span><br></pre></td></tr></table></figure>
+<h3 id="五、发送数据到后台"><a href="#五、发送数据到后台" class="headerlink" title="五、发送数据到后台"></a>五、发送数据到后台</h3><p>记得设置Content-Type<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  Axios(&#123;</span><br><span class="line">    headers: &#123;</span><br><span class="line">      <span class="string">'Content-Type'</span>: <span class="string">'multipart/form-data'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    method: <span class="string">'post'</span>,</span><br><span class="line">    data: formData,</span><br><span class="line">    url: <span class="string">'http://...'</span></span><br><span class="line">  &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'res'</span>, res)</span><br><span class="line">  &#125;, err =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'err'</span>, err)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
         
         <br>
@@ -163,6 +168,14 @@
         
         
 
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/5824339649">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
         
 
         
