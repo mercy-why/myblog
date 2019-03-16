@@ -11,7 +11,7 @@
 
     <title>
         
-        tags - 码鹿的网络日志
+        用Hexo搭建博客遇到的一些坑 - 码鹿的网络日志
         
     </title>
 
@@ -59,7 +59,7 @@
                     <span>主页</span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="/tags">
                     <i class="iconfont icon-biaoqian1"></i>
                     <span>标签</span>
@@ -88,6 +88,10 @@
         </ul>
     </div>
     
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#绑定域名"><span class="toc-text">绑定域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署到github"><span class="toc-text">部署到github</span></a></li></ol>
+</div>
+    
 </div>
 
 
@@ -110,82 +114,46 @@
     
     <div class="index-middle">
         <!-- Main Content -->
-        <div id="tag_cloud" class="tags">
-    
-    <a href="#ant-design" title="ant-design" rel="1">ant-design</a>
-    
-    <a href="#搭建博客" title="搭建博客" rel="1">搭建博客</a>
-    
-    <a href="#人生" title="人生" rel="1">人生</a>
-    
-</div>
-
-<!-- 标签列表 -->
+        
 
 
-<div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="ant-design">
-                    <span class="tag-text">ant-design</span>
-                </span>
-    
-    <!-- <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-    </li> -->
-    <div class="post-preview">
-        <a href="/2019/03/09/InAntdSaveAndUploadFile/">
-            <h2 class="post-title">
-                antd中使用upload改成点击保存后上传文件
-            </h2>
-            
-        </a>
-        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+<div class="post-container">
+    <div class="post-title">
+        用Hexo搭建博客遇到的一些坑
     </div>
-    
-</div>
 
-<div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="搭建博客">
-                    <span class="tag-text">搭建博客</span>
-                </span>
-    
-    <!-- <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-    </li> -->
-    <div class="post-preview">
-        <a href="/2019/02/27/TroubleInHexo/">
-            <h2 class="post-title">
-                用Hexo搭建博客遇到的一些坑
-            </h2>
-            
-        </a>
-        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-02-27 21:42:58</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#搭建博客" title="搭建博客">搭建博客</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
     </div>
-    
-</div>
+    <div class="post-content ">
+        <h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><p>绑定域名的时候每次都要在setting里添加Custom domain，然后会在仓库里自动添加一个CNAME文件，</p>
+<p>奇怪的是，每次hexo d的时候，总会自动覆盖。</p>
+<p>解决方法是在本地添加一个CNAME文件，写上域名，放进source文件夹，便不会被删除。</p>
+<h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><p>部署到github上时，总是传不上去，后来发现要先hexo g 再hexo d才行，hexo g的目的是生成静态文件。</p>
+<p>也可以hexo d -g</p>
 
-<div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="人生">
-                    <span class="tag-text">人生</span>
-                </span>
-    
-    <!-- <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-    </li> -->
-    <div class="post-preview">
-        <a href="/2019/03/16/my-life/">
-            <h2 class="post-title">
-                我的前端之路
-            </h2>
-            
-        </a>
-        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
     </div>
-    
 </div>
-
 
     </div>
 </div>
@@ -233,7 +201,7 @@
     // We expose some of the variables needed by the front end
     window.hexo_search_path = "search.json"
     window.hexo_root = "/"
-    window.isPost = false
+    window.isPost = true
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
