@@ -11,7 +11,7 @@
 
     <title>
         
-        用Hexo搭建博客遇到的一些坑 - 码鹿的网络日志
+        当我开始尝试用npm发布包 - 码鹿的网络日志
         
     </title>
 
@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#绑定域名"><span class="toc-text">绑定域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署到github"><span class="toc-text">部署到github</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#烦人的谷歌翻译提醒"><span class="toc-text">烦人的谷歌翻译提醒</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-发布包的基本流程"><span class="toc-text">1.发布包的基本流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-发布包的一些坑"><span class="toc-text">2.发布包的一些坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-关于deerpack"><span class="toc-text">3.关于deerpack</span></a></li></ol>
 </div>
     
 </div>
@@ -119,15 +119,15 @@
 
 <div class="post-container">
     <div class="post-title">
-        用Hexo搭建博客遇到的一些坑
+        当我开始尝试用npm发布包
     </div>
 
     <div class="post-meta">
-        <span class="attr">发布于：<span>2019-02-27 21:42:58</span></span>
+        <span class="attr">发布于：<span>2019-03-25 22:28:56</span></span>
         
         <span class="attr">标签：/
         
-        <a class="tag" href="/tags/#搭建博客" title="搭建博客">搭建博客</a>
+        <a class="tag" href="/tags/#nodeJs" title="nodeJs">nodeJs</a>
         <span>/</span>
         
         
@@ -137,14 +137,38 @@
 
     </div>
     <div class="post-content ">
-        <h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><p>绑定域名的时候每次都要在setting里添加Custom domain，然后会在仓库里自动添加一个CNAME文件，</p>
-<p>奇怪的是，每次hexo d的时候，总会自动覆盖。</p>
-<p>解决方法是在本地添加一个CNAME文件，写上域名，放进source文件夹，便不会被删除。</p>
-<h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><p>部署到github上时，总是传不上去，后来发现要先hexo g 再hexo d才行，hexo g的目的是生成静态文件。</p>
-<p>也可以hexo d -g</p>
-<h3 id="烦人的谷歌翻译提醒"><a href="#烦人的谷歌翻译提醒" class="headerlink" title="烦人的谷歌翻译提醒"></a>烦人的谷歌翻译提醒</h3><p>每次打开博客，右上角总会显示是否翻译。</p>
-<p>原因是设置lang=en。</p>
-<p>找到theme里的layout.ejs，去掉lang=en不会显示了。    </p>
+        <p><em>最近前端文件总是要打包上传到服务器上，所以总在重复一个动作，npm run build生成dist文件夹，再压缩成zip文件，上传服务器，改文件名。于是我想着能不能找一个脚本，可以比较方便的完成这套动作。找了几个npm包都不太满意，于是想着自己写一个发布。</em></p>
+<hr>
+<h2 id="1-发布包的基本流程"><a href="#1-发布包的基本流程" class="headerlink" title="1.发布包的基本流程"></a>1.发布包的基本流程</h2><ul>
+<li><strong>编写模块</strong><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将这段代码保存为index.js;</p>
+<ul>
+<li><strong>初始化包描述文件</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm init</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>npm通过提问式的交互诸葛填入选项，最后生成预览的包描述文件。确认后输入yes，此时会在目录下生产package.json文件。</p>
+<ul>
+<li><strong>注册包仓库账号</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm adduser</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这也是一个提问式的交互，按顺序注册即可。</p>
+<ul>
+<li><strong>上传包</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm publish .</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在这个过程中，npm会将目录打包为一个存档文件，然后上传到官方源仓库中。</p>
+<ul>
+<li><strong>更新包</strong><br>通过npm version &lt;update_type&gt;自动改变版本<br>update_type为patch, minor, or major其中之一，分别表示补丁，小改，大改</li>
+</ul>
+<h2 id="2-发布包的一些坑"><a href="#2-发布包的一些坑" class="headerlink" title="2.发布包的一些坑"></a>2.发布包的一些坑</h2><ul>
+<li><strong>不能和已有的包的名字重名或太相近！</strong><br>  为此我绞尽脑汁想了好几个名字，居然都不通过。</li>
+<li><strong>包名不能有大写字母/空格/下滑线!</strong><br>  进一步限制了可选的名字。</li>
+<li><strong>.gitignore里的文件会被忽略</strong><br>  如果项目里有不想上传的部分，可以写在.npmignore中，如果没有.npmignore文件，npm会寻找.gitignore文件，起同样作用。</li>
+<li><strong>只会上传dependencies里的依赖</strong><br>  我一直对npm install里的–save和–save-dev使用的比较混乱，所以一开始我的依赖装在devDependencies里，结果怎么都不起作用，原来是没有上传。</li>
+</ul>
+<h2 id="3-关于deerpack"><a href="#3-关于deerpack" class="headerlink" title="3.关于deerpack"></a>3.关于<a href="https://github.com/luckyRogue/deerpack" target="_blank" rel="noopener">deerpack</a></h2><p>正如文章开头所说，我写了一个小脚本，功能是将文件夹打包成zip文件，并且可以改名以及删除原文件夹。名字叫<a href="https://github.com/luckyRogue/deerpack" target="_blank" rel="noopener">deerpack</a>(点击名字可进入github查看使用方法)。<br>为什么要叫这么奇怪的名字呢，还不是因为重复的包名太多了。</p>
 
         
         <br>
