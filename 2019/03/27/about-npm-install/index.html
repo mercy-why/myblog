@@ -11,7 +11,7 @@
 
     <title>
         
-        tags - 码鹿的网络日志
+        一分钟搞懂npm install的参数 - 码鹿的网络日志
         
     </title>
 
@@ -59,7 +59,7 @@
                     <span>主页</span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="/tags">
                     <i class="iconfont icon-biaoqian1"></i>
                     <span>标签</span>
@@ -88,6 +88,10 @@
         </ul>
     </div>
     
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常用命令"><span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#区别"><span class="toc-text">区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+</div>
+    
 </div>
 
 
@@ -110,119 +114,75 @@
     
     <div class="index-middle">
         <!-- Main Content -->
-        <div id="tag_cloud" class="tags">
-    
-    <a href="#ant-design" title="ant-design" rel="1">ant-design</a>
-    
-    <a href="#搭建博客" title="搭建博客" rel="1">搭建博客</a>
-    
-    <a href="#nodeJs" title="nodeJs" rel="2">nodeJs</a>
-    
-    <a href="#人生" title="人生" rel="1">人生</a>
-    
-</div>
-
-<!-- 标签列表 -->
+        
 
 
-<div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="ant-design">
-                    <span class="tag-text">ant-design</span>
-                </span>
-    
-    <!-- <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-    </li> -->
-    <div class="post-preview">
-        <a href="/2019/03/09/InAntdSaveAndUploadFile/">
-            <h2 class="post-title">
-                antd中使用upload改成点击保存后上传文件
-            </h2>
-            
-        </a>
-        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+<div class="post-container">
+    <div class="post-title">
+        一分钟搞懂npm install的参数
     </div>
-    
-</div>
 
-<div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="搭建博客">
-                    <span class="tag-text">搭建博客</span>
-                </span>
-    
-    <!-- <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-    </li> -->
-    <div class="post-preview">
-        <a href="/2019/02/27/TroubleInHexo/">
-            <h2 class="post-title">
-                用Hexo搭建博客遇到的一些坑
-            </h2>
-            
-        </a>
-        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-    </div>
-    
-</div>
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-03-27 17:54:59</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#nodeJs" title="nodeJs">nodeJs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
 
-<div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="nodeJs">
-                    <span class="tag-text">nodeJs</span>
-                </span>
-    
-    <!-- <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-    </li> -->
-    <div class="post-preview">
-        <a href="/2019/03/27/about-npm-install/">
-            <h2 class="post-title">
-                一分钟搞懂npm install的参数
-            </h2>
-            
-        </a>
-        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
     </div>
-    
-    <!-- <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-    </li> -->
-    <div class="post-preview">
-        <a href="/2019/03/25/npm-publish/">
-            <h2 class="post-title">
-                当我开始尝试用npm发布包
-            </h2>
-            
-        </a>
-        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-    </div>
-    
-</div>
+    <div class="post-content ">
+        <p><em>之前一直对 <code>npm install</code> 的两个参数 <code>--save</code>和 <code>--save-dev</code> 分不清楚，甚至觉得这两个是同一个命令，因此踩不少坑，于是研究了一下 <code>npm install</code> 常用的几个参数。</em></p>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><ul>
+<li><code>npm install &lt;package_name&gt;</code></li>
+</ul>
+<p>使用该命令会安装在当前目录下，但不会写入项目中的package.json。</p>
+<ul>
+<li><code>npm install &lt;package_name&gt; --global  (简写-g)</code></li>
+</ul>
+<p>表示全局安装，一般来说会安装在系统预设的目录下。不会写入项目中的package.json。</p>
+<p>展示全局包实际位置 <code>npm root -g</code></p>
+<p>修改全局包位置<code>npm config set prefix &#39;目标目录&#39;</code></p>
+<ul>
+<li><code>npm install &lt;package_name&gt; --save (简写-S)</code></li>
+</ul>
+<p>表示生产环境下安装，会安装到项目中的<code>node_modules</code>中，并写入<code>package.json</code>里面的<code>dependencies</code></p>
+<ul>
+<li><code>npm install &lt;package_name&gt; --save-dev (简写-D)</code></li>
+</ul>
+<p>表示开发环境下安装，会安装到项目中的<code>node_modules</code>中，并写入<code>package.json</code>里面的<code>devDependencies</code></p>
+<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><ul>
+<li>安装位置的区别外</li>
+<li>运行<code>npm install</code>初始化项目时</li>
+</ul>
+<p><code>npm install &lt;package_name&gt;</code>和<code>npm install &lt;package_name&gt; --global</code>命令安装的模块<strong>不会</strong>自动下载</p>
+<p><code>npm install &lt;package_name&gt; --save</code> 和<code>npm install &lt;package_name&gt; --save-dev</code>命令安装的模块<strong>会</strong>自动下载</p>
+<ul>
+<li>运行<code>npm install --production</code>或者注明<code>NODE_ENV</code>变量值为<code>production</code>时</li>
+</ul>
+<p><code>dependencies</code>里的模块<strong>会</strong>自动下载</p>
+<p><code>devDependencies</code>里的模块<strong>不会</strong>自动下载</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><code>npm install &lt;package_name&gt;</code>相当于安装一次性的模块，项目中一般不适用</p>
+<p><code>npm install &lt;package_name&gt; -g</code>一般用于全局node工具的安装</p>
+<p><code>npm install &lt;package_name&gt; --save-dev</code>一般用于项目中开发工具的安装，如<code>mockjs</code>、<code>umi</code>等</p>
+<p><code>npm install &lt;package_name&gt; --save</code>一般用于项目中必需依赖的安装，如<code>react</code>、<code>antd</code>等</p>
 
-<div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="人生">
-                    <span class="tag-text">人生</span>
-                </span>
-    
-    <!-- <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-    </li> -->
-    <div class="post-preview">
-        <a href="/2019/03/16/my-life/">
-            <h2 class="post-title">
-                我的前端之路
-            </h2>
-            
-        </a>
-        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-    </div>
-    
-</div>
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
 
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
 
     </div>
 </div>
@@ -270,7 +230,7 @@
     // We expose some of the variables needed by the front end
     window.hexo_search_path = "search.json"
     window.hexo_root = "/"
-    window.isPost = false
+    window.isPost = true
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
