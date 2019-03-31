@@ -2,44 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://codedeer.cn/2019/03/27/about-npm-install/</loc>
-    
-    <lastmod>2019-03-27T11:09:33.041Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://codedeer.cn/2019/03/09/InAntdSaveAndUploadFile/</loc>
-    
-    <lastmod>2019-03-27T11:09:28.833Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://codedeer.cn/2019/03/16/my-life/</loc>
     
-    <lastmod>2019-03-27T11:09:24.784Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://codedeer.cn/2019/03/25/npm-publish/</loc>
-    
-    <lastmod>2019-03-27T11:09:19.240Z</lastmod>
+    <lastmod>2019-03-31T16:22:03.225Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codedeer.cn/2019/02/27/TroubleInHexo/</loc>
     
-    <lastmod>2019-03-27T11:09:11.463Z</lastmod>
+    <lastmod>2019-03-31T16:21:41.384Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://codedeer.cn/2019/03/25/npm-publish/</loc>
+    
+    <lastmod>2019-03-31T16:21:33.793Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://codedeer.cn/2019/03/09/InAntdSaveAndUploadFile/</loc>
+    
+    <lastmod>2019-03-31T16:21:18.176Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://codedeer.cn/2019/03/27/about-npm-install/</loc>
+    
+    <lastmod>2019-03-31T16:21:02.057Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codedeer.cn/about/index.html</loc>
     
-    <lastmod>2019-03-07T13:54:09.385Z</lastmod>
+    <lastmod>2019-03-31T13:41:59.625Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://codedeer.cn/gallery/index.html</loc>
+    
+    <lastmod>2019-03-31T13:41:37.568Z</lastmod>
     
   </url>
   
