@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
@@ -115,11 +115,10 @@
 
 
   
-
+  <div id="comment"></div>
   
     
   
-
 </article>
 
 
@@ -150,7 +149,7 @@
 <nav class="navbar">
   
     <div class="logo">
-      <a href="/"><img src="/images/me.png" alt="码鹿"></a>
+      <a href="/"><img src="/images/timg.png" alt="码鹿"></a>
     </div>
   
   <ul class="nav nav-main">
@@ -172,7 +171,7 @@
       </li>
     
     <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="Search">
+      <a class="nav-item-link nav-item-search" title="搜索">
         <i class="fe fe-search"></i>
         搜索
       </a>
@@ -200,6 +199,23 @@
 </div>
 </aside>
 <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!--Leancloud 操作库:-->
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!--Valine 的核心代码库-->
+  <script src="/js/Valine.min.js"></script>
+  <script>
+      new Valine({
+          av: AV, 
+          el: '#comment',
+          app_id: 'aD00A9nKkOPshTpmdQVejH8g-gzGzoHsz',
+          app_key: 'dGCrXKxAYrJAJYpyhnjIdwRd',
+          placeholder: '说点什么吧',
+          notify: false,
+          verify: false 
+      });
+  </script>
+
 <script src="/js/lazyload.min.js"></script>
 <script src="/js/busuanzi-2.3.pure.min.js"></script>
 
