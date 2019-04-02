@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title><![CDATA[一分钟搞懂npm install的参数]]></title>
-    <url>%2F2019%2F03%2F27%2Fabout-npm-install%2F</url>
+    <url>%2Fmyblog%2F2019%2F03%2F27%2Fabout-npm-install%2F</url>
     <content type="text"><![CDATA[之前一直对 npm install 的两个参数 --save和 --save-dev 分不清楚，甚至觉得这两个是同一个命令，因此踩不少坑，于是研究了一下 npm install 常用的几个参数。 常用命令 npm install &lt;package_name&gt; 使用该命令会安装在当前目录下，但不会写入项目中的package.json。 npm install &lt;package_name&gt; --global (简写-g) 表示全局安装，一般来说会安装在系统预设的目录下。不会写入项目中的package.json。 展示全局包实际位置 npm root -g 修改全局包位置npm config set prefix &#39;目标目录&#39; npm install &lt;package_name&gt; --save (简写-S) 表示生产环境下安装，会安装到项目中的node_modules中，并写入package.json里面的dependencies npm install &lt;package_name&gt; --save-dev (简写-D) 表示开发环境下安装，会安装到项目中的node_modules中，并写入package.json里面的devDependencies 区别 安装位置的区别外 运行npm install初始化项目时 npm install &lt;package_name&gt;和npm install &lt;package_name&gt; --global命令安装的模块不会自动下载 npm install &lt;package_name&gt; --save 和npm install &lt;package_name&gt; --save-dev命令安装的模块会自动下载 运行npm install --production或者注明NODE_ENV变量值为production时 dependencies里的模块会自动下载 devDependencies里的模块不会自动下载 总结npm install &lt;package_name&gt;相当于安装一次性的模块，项目中一般不适用 npm install &lt;package_name&gt; -g一般用于全局node工具的安装 npm install &lt;package_name&gt; --save-dev一般用于项目中开发工具的安装，如mockjs、umi等 npm install &lt;package_name&gt; --save一般用于项目中必需依赖的安装，如react、antd等]]></content>
       <tags>
         <tag>nodeJs</tag>
@@ -10,7 +10,7 @@
   </entry>
   <entry>
     <title><![CDATA[当我开始尝试用npm发布包]]></title>
-    <url>%2F2019%2F03%2F25%2Fnpm-publish%2F</url>
+    <url>%2Fmyblog%2F2019%2F03%2F25%2Fnpm-publish%2F</url>
     <content type="text"><![CDATA[最近前端文件总是要打包上传到服务器上，所以总在重复一个动作，npm run build生成dist文件夹，再压缩成zip文件，上传服务器，改文件名。于是我想着能不能找一个脚本，可以比较方便的完成这套动作。找了几个npm包都不太满意，于是想着自己写一个发布。 1.发布包的基本流程 编写模块123module.exports = function ()&#123; ...&#125;; 将这段代码保存为index.js; 初始化包描述文件1$ npm init npm通过提问式的交互诸葛填入选项，最后生成预览的包描述文件。确认后输入yes，此时会在目录下生产package.json文件。 注册包仓库账号1$ npm adduser 这也是一个提问式的交互，按顺序注册即可。 上传包1$ npm publish . 在这个过程中，npm会将目录打包为一个存档文件，然后上传到官方源仓库中。 更新包通过npm version &lt;update_type&gt;自动改变版本update_type为patch, minor, or major其中之一，分别表示补丁，小改，大改 2.发布包的一些坑 不能和已有的包的名字重名或太相近！ 为此我绞尽脑汁想了好几个名字，居然都不通过。 包名不能有大写字母/空格/下滑线! 进一步限制了可选的名字。 .gitignore里的文件会被忽略 如果项目里有不想上传的部分，可以写在.npmignore中，如果没有.npmignore文件，npm会寻找.gitignore文件，起同样作用。 只会上传dependencies里的依赖 我一直对npm install里的–save和–save-dev使用的比较混乱，所以一开始我的依赖装在devDependencies里，结果怎么都不起作用，原来是没有上传。对这两个参数傻傻分不清楚的同学,可以看这篇文章 一分钟搞懂npm install的参数。 3.关于deerpack正如文章开头所说，我写了一个小脚本，功能是将文件夹打包成zip文件，并且可以改名以及删除原文件夹。名字叫deerpack(点击名字可进入github查看使用方法)。为什么要叫这么奇怪的名字呢，还不是因为重复的包名太多了。]]></content>
       <tags>
         <tag>nodeJs</tag>
@@ -18,7 +18,7 @@
   </entry>
   <entry>
     <title><![CDATA[我的前端之路]]></title>
-    <url>%2F2019%2F03%2F16%2Fmy-life%2F</url>
+    <url>%2Fmyblog%2F2019%2F03%2F16%2Fmy-life%2F</url>
     <content type="text"><![CDATA[我并不是科班出身。大学没有选计算机专业，一度是我人生中最后悔的事情。实习的那年，不学无术的我，经历了社会狠狠的毒打。此时的我，一门心思想搞IT，于是找了一家IT学校。学校里只有前端和PHP，我想了想报了前端，培训了半年。不得不说，那是我最快乐的一段时光，还认识了我的好朋友，林。 欢乐时光总是短暂的，眨眼间就要开始找工作了。此时的我已经毕业半年了，来到了2018年初。来自各处的压力，让我心里焦急的很，满脑子都是赶紧上班赚钱。 一周的时间，我面试了四家公司，第二周收到了两个offer，略微思考了一下，我去了待遇和薪资好一点的那家。当时的我虽然学了一大堆乱七八糟的，也依葫芦画瓢做了几个项目，但是自己有几斤几两还是心理有数的。 上班第一天，领导就丢给了我一个项目，五十多张设计图，让我估个时间。我很慌，甚至不明白他说的切图是什么。对着电脑屏幕想了一上午，是拿刀切还是用ps切。问了问产品经理，他说就是做成网页，大概要15个工作日吧。我如是跟领导说，领导说不行，12个工作日搞定。当时我的心里一惊，心想，不会刚开始工作就要被辞了吧，感觉凉凉了。 打开编辑器，不知道从何开始，问了问对面的前端实习生，她说就这么写呗。。。后来，我只能硬着头皮开始了切图。不得不说，当时我的css真是太差了，页面完全是像搭积木打起来的。浮动，清除浮动，一块一块的堆起来。类名各种重复，代码真是烂到家了。一天下来，才做了首页的一个导航栏。 我深知照这个速度根本赶不上，压力山大，回家后继续码代码，一直干到睡觉，中午也不休息，边吃饭边切图。深知生活的压力，轻轻松松就能让人拼死拼活。高三的时候我要是这么努力，早就考上名牌大学了。 就这样，我甚至提前2天完成了项目。其实是中间有三天清明节放假，我还在干活。领导对我很满意，虽然代码一团糟，但是做出的效果跟设计图一样的就行了。于是又给了我一个新项目，90多张设计图，关键还是设计一边出图，我一边切图，考虑到同步问题，让我在设计后面晚一个星期完成。 熟练后，我的速度赶上了设计。在等待设计出图的时候，我终于有时间学一点东西了。我发现公司的前端主要是写样式，偶尔用用jquery写点交互，数据渲染全用的php。于是我打算先把css精进一下。在网上我看到了张鑫旭博客，学了不少东西，然后我买了一本他的书《css世界》。 这本书让我对css底层的一些东西有了深层次的理解，还有不少奇思淫巧，语言也是通俗易懂，就是有些比喻太长了，有些冗长。总体而言是一本非常不错的书。不过这本书讲的都是css2.1之前的东西，希望作者再出一本关于css3的书吧，毕竟弹性盒是真的好用啊。 参考了张鑫旭样式分开的想法，我自己也写了一个常用的css库–mycss，这样写样式特别快，效率提高了不少。 话说回来，我在公司已经呆了两个月了，由于表现良好，提前转了正，工资也涨了一点点。可我并没有开心，因为在同期的学生中，我并不算优秀。领导许诺我，三个月后按照工作量来调薪，并制定了各个项目的分数。我心里暗暗高兴，照这个进度下去，铁定涨薪啊，还不少呢。 傻傻的我工作更加卖力，虽然没怎么加班，但是效率极高，记得有一次，公司的伙伴公司缺人，派我去帮忙，三天后，公司领导似乎感觉到不对劲，一直催促我回去，于是我快马加鞭，短短一周便帮他们完成了项目。回去后，领导喜出望外，又给了我一堆项目。当时的我反而很高兴，反正我做的越多，到时候涨薪就越多啊。结果不知道是不是公司陈年累计的项目都做完了，还是设计人手不够了，我没有项目做了。 领导也不是傻子，自然不会让我闲着，派了一个老员工教我php，让我边做边学。记得当时用的Laravel框架，现在看跟前端好多脚手架很像呢。公司前端的技术栈少的可怜，基本上就是个切图仔，偶尔用Jquery做做交互。我深知继续下去只能做一个井底之蛙，虽然只干了半年，但还是开始谋划着跳槽，一个月内投了不少简历，结果只有两家让我去面试。第一家没准备好，回答的一塌糊涂，没戏。第二家是个规模不小的外包，让我先去华为面试，第一次踏入大公司的门，心里还有些激动。所幸面试官并没有为难我，通过了。 辞职的时候，心情很复杂，在公司过得也很开心，领导对我也不错，觉得有点对不起这个把我拉扯大的起点。最后鼓起勇气跟领导说了，领导刚开始很讶异，后来似乎也想明白了些什么，问我找到新工作了吗，我回答是。他笑了笑，着急走吗？我淡淡的说，尽快吧。我把手上两个项目完成后就离开了。 离开后的第二天，我来到了新公司。一进来，就感觉到了自己的渺小，不仅人多，大牛也很多。在茫茫人海中，我只是一颗小小的螺丝钉。从头开始吧，我对自己说。这次又踏上了新的征程。 我的目标是星辰大海。]]></content>
       <tags>
         <tag>人生</tag>
@@ -26,7 +26,7 @@
   </entry>
   <entry>
     <title><![CDATA[antd中使用upload改成点击保存后上传文件]]></title>
-    <url>%2F2019%2F03%2F09%2FInAntdSaveAndUploadFile%2F</url>
+    <url>%2Fmyblog%2F2019%2F03%2F09%2FInAntdSaveAndUploadFile%2F</url>
     <content type="text"><![CDATA[公司项目的UI框架用的是antd，最近有一个上传jar包的需求，需要点击保存后，和表单一起上传到一个地址。但Upload组件默认是选择文件后立即上传文件。如何实现呢？ 一、双向绑定表单1234567891011 &lt;Form.Item label="file"&gt; &#123;getFieldDecorator('file', &#123; rules: [&#123;required: true&#125;] &#125;)( &lt;Upload beforeUpload=&#123;beforeUpload&#125;&gt; &lt;Button&gt; &lt;Icon type="upload" /&gt; Click to Upload &lt;/Button&gt; &lt;/Upload&gt;, )&#125;&lt;/Form.Item&gt; 二、阻止默认提交beforeUpload 返回 false 后，可以手动上传文件。123const beforeUpload = (file) =&gt; &#123; return false; &#125;, 三、创建一个formData对象实例1const formData = new FormData(); 四、把表单里的数据添加进去12const data = props.form.getFieldsValue();formData.append('file',data.file); 五、发送数据到后台记得设置Content-Type12345678910111213 Axios(&#123; headers: &#123; 'Content-Type': 'multipart/form-data' &#125;, method: 'post', data: formData, url: 'http://...' &#125;).then(res =&gt; &#123; console.log('res', res) &#125;, err =&gt; &#123; console.log('err', err) &#125;)&#125;]]></content>
       <tags>
         <tag>ant-design</tag>
@@ -34,7 +34,7 @@
   </entry>
   <entry>
     <title><![CDATA[用Hexo搭建博客遇到的一些坑]]></title>
-    <url>%2F2019%2F02%2F27%2FTroubleInHexo%2F</url>
+    <url>%2Fmyblog%2F2019%2F02%2F27%2FTroubleInHexo%2F</url>
     <content type="text"><![CDATA[绑定域名绑定域名的时候每次都要在setting里添加Custom domain，然后会在仓库里自动添加一个CNAME文件， 奇怪的是，每次hexo d的时候，总会自动覆盖。 解决方法是在本地添加一个CNAME文件，写上域名，放进source文件夹，便不会被删除。 部署到github部署到github上时，总是传不上去，后来发现要先hexo g 再hexo d才行，hexo g的目的是生成静态文件。 也可以hexo d -g ocean主题的摘要最近使用了ocean主题，让我纳闷的是首页的文章直接显示全文，而没有显示摘要。查看源码后发现，如果没有 post.excerpt 的话就会显示文章全部内容，hexo会检索第一次出现&lt;!-- more --&gt;的时候，显示这部分内容为摘要。所以把&lt;!-- more --&gt;放到想放的位置即可。]]></content>
       <tags>
         <tag>搭建博客</tag>
