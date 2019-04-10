@@ -893,6 +893,7 @@ body ::selection {
 }
 a {
   color: #127ea9;
+  text-decoration: none;
 }
 a:hover {
   color: #1594c6;
@@ -1128,6 +1129,12 @@ img {
 .list-inline > li {
   display: inline-block;
   padding: 0 0.75rem;
+}
+.list-inline a {
+  color: #1e3e3f;
+}
+.list-inline a:hover {
+  color: #127ea9;
 }
 .video {
   position: relative;
@@ -2001,7 +2008,7 @@ pre .javascript .function {
 }
 .navbar-bottom {
   position: absolute;
-  bottom: 0;
+  bottom: 6rem;
   width: 100%;
 }
 .logo {
