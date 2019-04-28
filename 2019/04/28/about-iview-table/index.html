@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="宋小宇的个人博客">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    如何在iView中动态创建表格 |
+    
+    码鹿</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+  <link href="//at.alicdn.com/t/font_1124940_ynpgwaj6u0e.css" rel="stylesheet" type="text/css">
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-about-iview-table" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      如何在iView中动态创建表格
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/04/28/about-iview-table/" class="article-date">
+  <time datetime="2019-04-28T15:03:40.000Z" itemprop="datePublished">2019-04-28</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <p><em>最近在使用iView中的表格组件时，碰到许多坑和疑惑，仔细研究了一下table组件，发现官方文档讲的不是很清楚，本文将介绍并使用table组件，做一个动态创建表格的demo，效果如下图</em></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/4/28/16a643ffda0f8ee7?w=1022&amp;h=200&amp;f=png&amp;s=11180" alt><a id="more"></a></p>
+<h2 id="一、在columns中写render函数"><a href="#一、在columns中写render函数" class="headerlink" title="一、在columns中写render函数"></a>一、在columns中写render函数</h2><p>查看官方文档可知，表格中主要的两个属性分别为<code>columns</code>和<code>data</code>。<code>columns</code>用来渲染列，<code>data</code>是渲染所用的数据，想在iView中插入标签，需要用它提供的<code>render</code>函数，这跟react的render差不多。</p>
+<p>render函数的几个参数：</p>
+<ul>
+<li><code>h</code>:   <code>Render</code>函数的别名（全名 <code>createElement</code>）</li>
+</ul>
+<ul>
+<li><code>params</code>： <code>table</code> 该行内容的对象，包含<code>row</code>（当前行对象）和<code>index</code>（当前行的序列号）</li>
+</ul>
+<ul>
+<li><code>props</code>：设置创建的标签对象的属性</li>
+</ul>
+<ul>
+<li><code>style</code>：设置创建的标签对象的样式</li>
+</ul>
+<ul>
+<li><code>on</code>：为创建的标签绑定事件</li>
+</ul>
+<h2 id="二、如何写render函数"><a href="#二、如何写render函数" class="headerlink" title="二、如何写render函数"></a>二、如何写render函数</h2><h3 id="1-插入Input"><a href="#1-插入Input" class="headerlink" title="1.插入Input"></a>1.插入Input</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">render: (h, &#123; row, index &#125;) =&gt; &#123;</span><br><span class="line">  return h(&quot;Input&quot;, &#123;</span><br><span class="line">    props: &#123;</span><br><span class="line">      value: row.name</span><br><span class="line">    &#125;,</span><br><span class="line">    on: &#123;</span><br><span class="line">      input: val =&gt; &#123;</span><br><span class="line">        this.data[index].name = val;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是一个插入Input框的例子。</p>
+<ul>
+<li><code>h</code>渲染出<code>&lt;input&gt;</code>标签</li>
+<li><code>prop</code>设置其<code>value</code>为当前行的<code>name</code></li>
+<li><code>on</code>添加<code>input</code>方法，使当前行的<code>name</code>为输入的值<h3 id="2-插入Select"><a href="#2-插入Select" class="headerlink" title="2.插入Select"></a>2.插入Select</h3></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">          title: &quot;爱好&quot;,</span><br><span class="line">          key: &quot;hobby&quot;,</span><br><span class="line">          render: (h, &#123; row, index &#125;) =&gt; &#123;</span><br><span class="line">            return h(&quot;Select&quot;, &#123;</span><br><span class="line">              props: &#123;</span><br><span class="line">                value: row.hobby</span><br><span class="line">              &#125;,</span><br><span class="line">              on: &#123;</span><br><span class="line">                &apos;on-select&apos;: val =&gt; &#123;</span><br><span class="line">                  this.data[index].hobby = val;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            this.options.map(item=&gt;&#123;</span><br><span class="line">              return h(&apos;Option&apos;,&#123;</span><br><span class="line">                props:&#123;</span><br><span class="line">                  value:item,</span><br><span class="line">                  label:item</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">            );</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br></pre></td></tr></table></figure>
+<p>这是一个插入Select框的例子</p>
+<p>将要嵌套的组件用花括号放在后面,<code>option</code>可通过<code>map</code>函数就可以代替<code>v-for</code>的渲染。</p>
+<p>如果要嵌套多个组件，可以写成数组的形式。比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">render: (h, params) =&gt; &#123;</span><br><span class="line">                            return h(&apos;div&apos;, [</span><br><span class="line">                                h(&apos;Button&apos;),</span><br><span class="line">                                h(&apos;Button&apos;)</span><br><span class="line">                            ]);</span><br><span class="line">                        &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="三、一些常见的坑"><a href="#三、一些常见的坑" class="headerlink" title="三、一些常见的坑"></a>三、一些常见的坑</h2><ul>
+<li><p>插入<code>Select</code>组件的时候，如果table行数较少，会出现遮住下拉框的情况。<br><img src="https://user-gold-cdn.xitu.io/2019/4/28/16a646bcaf0ef582?w=314&amp;h=158&amp;f=png&amp;s=5586" alt><br>解决方法：在table组件上加上样式<code>overflow: visible</code>。</p>
+</li>
+<li><p><code>Select</code>组件的触发事件为<code>on-change</code></p>
+</li>
+<li>需要用<code>props</code>设置初始值，否则值不会渲染到真正的当前行。</li>
+</ul>
+<h2 id="四、完整代码"><a href="#四、完整代码" class="headerlink" title="四、完整代码"></a>四、完整代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;table&quot;&gt;</span><br><span class="line">    &lt;Button class=&quot;button&quot; @click=&quot;add&quot;&gt;Add&lt;/Button&gt;</span><br><span class="line">    &lt;Table :columns=&quot;columns&quot; :data=&quot;data&quot; class=&quot;table-fixbug&quot;&gt;&lt;/Table&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &quot;HelloWorld&quot;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      columns: [</span><br><span class="line">        &#123;</span><br><span class="line">          type: &quot;selection&quot;,</span><br><span class="line">          width: 60,</span><br><span class="line">          align: &quot;center&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          title: &quot;姓名&quot;,</span><br><span class="line">          key: &quot;name&quot;,</span><br><span class="line">          render: (h, &#123; row, index &#125;) =&gt; &#123;</span><br><span class="line">            return h(&quot;Input&quot;, &#123;</span><br><span class="line">              props: &#123;</span><br><span class="line">                value: row.name</span><br><span class="line">              &#125;,</span><br><span class="line">              on: &#123;</span><br><span class="line">                input: val =&gt; &#123;</span><br><span class="line">                  this.data[index].name = val;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          title: &quot;爱好&quot;,</span><br><span class="line">          key: &quot;hobby&quot;,</span><br><span class="line">          render: (h, &#123; row, index &#125;) =&gt; &#123;</span><br><span class="line">            return h(&quot;Select&quot;, &#123;</span><br><span class="line">              props: &#123;</span><br><span class="line">                value: row.hobby</span><br><span class="line">              &#125;,</span><br><span class="line">              on: &#123;</span><br><span class="line">                &apos;on-select&apos;: val =&gt; &#123;</span><br><span class="line">                  this.data[index].hobby = val;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            this.options.map(item=&gt;&#123;</span><br><span class="line">              return h(&apos;Option&apos;,&#123;</span><br><span class="line">                props:&#123;</span><br><span class="line">                  value:item,</span><br><span class="line">                  label:item</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">            );</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          title: &quot;职业&quot;,</span><br><span class="line">          key: &quot;job&quot;,</span><br><span class="line">          render: (h, &#123; row, index &#125;) =&gt; &#123;</span><br><span class="line">            return h(&quot;Input&quot;, &#123;</span><br><span class="line">              props: &#123;</span><br><span class="line">                value: row.job</span><br><span class="line">              &#125;,</span><br><span class="line">              on: &#123;</span><br><span class="line">                input: val =&gt; &#123;</span><br><span class="line">                  this.data[index].job = val;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          title: &quot;operation&quot;,</span><br><span class="line">          key: &quot;operation&quot;,</span><br><span class="line">          render: (h, &#123; row, index &#125;) =&gt; &#123;</span><br><span class="line">            return h(</span><br><span class="line">              &quot;a&quot;,</span><br><span class="line">              &#123;</span><br><span class="line">                on: &#123;</span><br><span class="line">                  click: () =&gt; &#123;</span><br><span class="line">                    this.data.splice(index, 1);</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;,</span><br><span class="line">              &quot;Delete&quot;</span><br><span class="line">            );</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      data: [</span><br><span class="line">        &#123;</span><br><span class="line">          name: &quot;&quot;,</span><br><span class="line">          hobby: &quot;&quot;,</span><br><span class="line">          job: &quot;&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      options:[&apos;电影&apos;,&apos;游戏&apos;,&apos;看书&apos;]</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    add() &#123;</span><br><span class="line">      const addData = &#123;</span><br><span class="line">        name: &quot;&quot;,</span><br><span class="line">        hobby: &quot;&quot;,</span><br><span class="line">        job: &quot;&quot;</span><br><span class="line">      &#125;;</span><br><span class="line">      this.data.push(addData);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">.table &#123;</span><br><span class="line">  text-align: left;</span><br><span class="line">&#125;</span><br><span class="line">.button &#123;</span><br><span class="line">  margin-bottom: 20px;</span><br><span class="line">&#125;</span><br><span class="line">.table-fixbug&#123;</span><br><span class="line">  overflow: visible;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/about-iview-table/" data-id="cjv12frqu0005xwvh2cu1fn6o" class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/03/27/about-npm-install/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">一分钟搞懂npm install的参数</div>
+      </a>
+    
+  </nav>
+
+
+  
+  <div id="comment"></div>
+  
+    
+  
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 码鹿</li>
+      
+      <li>
+          <a target="_blank" href="http://weibo.com/5824339649">
+                          <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-weibo"></i>
+                          </span>
+          </a>
+      </li>
+      
+
+      
+
+      
+      <li>
+          <a target="_blank" href="https://github.com/luckyRogue">
+                          <span class="fa-stack fa-lg">
+                              <i class="iconfont icon-git"></i>
+                          </span>
+          </a>
+      </li>
+      
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/timg.png" alt="码鹿"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="back-to-top">
+      <i class="iconfont icon-back-top"></i> <br>
+    </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!--Leancloud 操作库:-->
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!--Valine 的核心代码库-->
+  <script src="/js/Valine.min.js"></script>
+  <script>
+      new Valine({
+          av: AV, 
+          el: '#comment',
+          app_id: 'aD00A9nKkOPshTpmdQVejH8g-gzGzoHsz',
+          app_key: 'dGCrXKxAYrJAJYpyhnjIdwRd',
+          placeholder: '说点什么吧',
+          notify: false,
+          verify: false 
+      });
+  </script>
+
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/live2d-widget@3.x/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
