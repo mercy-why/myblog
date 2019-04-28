@@ -68,47 +68,59 @@
     var $this = $(this),
       url = $this.attr('data-url'),
       encodedUrl = encodeURIComponent(url),
-      id = 'article-share-box-' + $this.attr('data-id'),
-      offset = $this.offset();
+      id = 'article-share-box-' + $this.attr('data-id');
 
-    if ($('#' + id).length) {
-      var box = $('#' + id);
-
-      if (box.hasClass('on')) {
-        box.removeClass('on');
-        return;
-      }
-    } else {
-      var html = [
-        '<div id="' + id + '" class="article-share-box">',
-        '<input class="article-share-input" value="' + url + '">',
-        '<div class="article-share-links">',
-        '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-        '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-        '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
-        '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
-        '</div>',
-        '</div>'
-      ].join('');
-
-      var box = $(html);
-      $('body').append(box);
+    const input = document.createElement('input');
+    input.setAttribute('readonly', 'readonly');
+    input.setAttribute('value', url);
+    document.body.appendChild(input);
+    input.setSelectionRange(0, 9999);
+    input.select();
+    if (document.execCommand('copy')) {
+      document.execCommand('copy');
+      alert("分享链接已复制到剪贴板")
     }
-    $('.article-share-box.on').hide();
+    document.body.removeChild(input);
+    // offset = $this.offset();
 
-    box.css({
-      top: offset.top + 25,
-      left: offset.left
-    }).addClass('on');
-  }).on('click', '.article-share-box', function (e) {
-    e.stopPropagation();
-  }).on('click', '.article-share-box-input', function () {
-    $(this).select();
-  }).on('click', '.article-share-box-link', function (e) {
-    e.preventDefault();
-    e.stopPropagation();
+    //   if ($('#' + id).length) {
+    //     var box = $('#' + id);
 
-    window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    //     if (box.hasClass('on')) {
+    //       box.removeClass('on');
+    //       return;
+    //     }
+    //   } else {
+    //     var html = [
+    //       '<div id="' + id + '" class="article-share-box">',
+    //       '<input class="article-share-input" value="' + url + '">',
+    //       '<div class="article-share-links">',
+    //       '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+    //       '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+    //       '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+    //       '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+    //       '</div>',
+    //       '</div>'
+    //     ].join('');
+
+    //     var box = $(html);
+    //     $('body').append(box);
+    //   }
+    //   $('.article-share-box.on').hide();
+
+    //   box.css({
+    //     top: offset.top + 25,
+    //     left: offset.left
+    //   }).addClass('on');
+    // }).on('click', '.article-share-box', function (e) {
+    //   e.stopPropagation();
+    // }).on('click', '.article-share-box-input', function () {
+    //   $(this).select();
+    // }).on('click', '.article-share-box-link', function (e) {
+    //   e.preventDefault();
+    //   e.stopPropagation();
+
+    //   window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
   });
 
   // fancybox
@@ -125,7 +137,9 @@
   $(document).ready(function ($) {
     $(".anchor").click(function (event) {
       event.preventDefault();
-      $('html,body').animate({scrollTop: $(this.hash).offset().top}, 500);
+      $('html,body').animate({
+        scrollTop: $(this.hash).offset().top
+      }, 500);
     });
   });
 
@@ -151,12 +165,32 @@
     $content.toggleClass('on');
     $sidebar.toggleClass('on');
     stopMobileNavAnim();
-  });
-
+  });;
+  (function ($) {
+    $.fn.extend({
+      "goTop": function () {
+        var _this = this; //指向当前元素
+        $(window).scroll(function () {
+          //判断屏幕滚动距离（>400时出现按钮）
+          if ($(this).scrollTop() > 400) {
+            _this.show();
+          } else {
+            _this.hide();
+          }
+        });
+        return this.click(function () {
+          //回到顶部
+          $('body,html').stop(true).animate({
+            scrollTop: 0
+          });
+        });
+      }
+    })
+  })(jQuery);
   $($content).on('click', function () {
     if (isMobileNavAnim || !$content.hasClass('on')) return;
     $content.removeClass('on');
     $sidebar.removeClass('on');
   });
-
+  $('.back-to-top').goTop();
 })(jQuery);

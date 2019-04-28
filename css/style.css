@@ -1115,6 +1115,10 @@ img {
   .valine {
     margin-top: 40px;
   }
+  .back-to-top {
+    cursor: pointer;
+    display: none;
+  }
 }
 .list-unstyled,
 .list-inline {
