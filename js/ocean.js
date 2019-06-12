@@ -141,7 +141,8 @@
         scrollTop: $(this.hash).offset().top
       }, 500);
     });
-    setTimeout(function(){$(".anchor").trigger("click")}, 2000)();
+    var time = setTimeout(function(){$(".anchor").trigger("click")}, 2000);
+    time();
   });
 
   // Mobile nav
