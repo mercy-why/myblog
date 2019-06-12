@@ -57,7 +57,7 @@
 
       
         <p><em>最近在使用iView中的表格组件时，碰到许多坑和疑惑，仔细研究了一下table组件，发现官方文档讲的不是很清楚，本文将介绍并使用table组件，做一个动态创建表格的demo，效果如下图</em></p>
-<p><img src="&quot;../img/table.png&quot;" alt><a id="more"></a></p>
+<p><img src="../img/table.png" alt><a id="more"></a></p>
 <h2 id="一、在columns中写render函数"><a href="#一、在columns中写render函数" class="headerlink" title="一、在columns中写render函数"></a>一、在columns中写render函数</h2><p>查看官方文档可知，表格中主要的两个属性分别为<code>columns</code>和<code>data</code>。<code>columns</code>用来渲染列，<code>data</code>是渲染所用的数据，想在iView中插入标签，需要用它提供的<code>render</code>函数，这跟react的render差不多。</p>
 <p>render函数的几个参数：</p>
 <ul>
@@ -88,7 +88,7 @@
 <p>如果要嵌套多个组件，可以写成数组的形式。比如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">render: (h, params) =&gt; &#123;</span><br><span class="line">                            return h(&apos;div&apos;, [</span><br><span class="line">                                h(&apos;Button&apos;),</span><br><span class="line">                                h(&apos;Button&apos;)</span><br><span class="line">                            ]);</span><br><span class="line">                        &#125;</span><br></pre></td></tr></table></figure>
 <h2 id="三、一些常见的坑"><a href="#三、一些常见的坑" class="headerlink" title="三、一些常见的坑"></a>三、一些常见的坑</h2><ul>
-<li><p>插入<code>Select</code>组件的时候，如果table行数较少，会出现遮住下拉框的情况。<br><img src="https://user-gold-cdn.xitu.io/2019/4/28/16a646bcaf0ef582?w=314&amp;h=158&amp;f=png&amp;s=5586" alt><br>解决方法：在table组件上加上样式<code>overflow: visible</code>。</p>
+<li><p>插入<code>Select</code>组件的时候，如果table行数较少，会出现遮住下拉框的情况。<br><img src="../img/table2.png" alt><br>解决方法：在table组件上加上样式<code>overflow: visible</code>。</p>
 </li>
 <li><p><code>Select</code>组件的触发事件为<code>on-change</code></p>
 </li>
