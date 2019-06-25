@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    tags |
+    用Hexo搭建博客遇到的一些坑 |
     
     码鹿</title>
   
@@ -26,7 +26,7 @@
 <body>
 <main class="content">
   <section class="outer">
-  <article id="tags-" class="article article-type-tags" itemscope itemprop="blogPost" data-scroll-reveal>
+  <article id="post-TroubleInHexo" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
     
@@ -34,13 +34,20 @@
         
   
     <h1 class="article-title" itemprop="name">
-      tags
+      用Hexo搭建博客遇到的一些坑
     </h1>
   
 
       </header>
     
 
+    
+      <div class="article-meta">
+        <a href="/2019/02/27/TroubleInHexo/" class="article-date">
+  <time datetime="2019-02-27T13:42:58.197Z" itemprop="datePublished">2019-02-27</time>
+</a>
+        
+      </div>
     
 
     <div class="article-entry" itemprop="articleBody">
@@ -49,21 +56,45 @@
       
 
       
-        
+        <h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><p>绑定域名的时候每次都要在setting里添加Custom domain，然后会在仓库里自动添加一个CNAME文件，</p>
+<p>奇怪的是，每次hexo d的时候，总会自动覆盖。</p>
+<p>解决方法是在本地添加一个CNAME文件，写上域名，放进source文件夹，便不会被删除。<a id="more"></a></p>
+<h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><p>部署到github上时，总是传不上去，后来发现要先hexo g 再hexo d才行，hexo g的目的是生成静态文件。</p>
+<p>也可以hexo d -g</p>
+<h3 id="ocean主题的摘要"><a href="#ocean主题的摘要" class="headerlink" title="ocean主题的摘要"></a>ocean主题的摘要</h3><p>最近使用了ocean主题，让我纳闷的是首页的文章直接显示全文，而没有显示摘要。查看源码后发现，如果没有 <code>post.excerpt</code> 的话就会显示文章全部内容，<br>hexo会检索第一次出现<code>&lt;!-- more --&gt;</code>的时候，显示这部分内容为摘要。所以把<code>&lt;!-- more --&gt;</code>放到想放的位置即可。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://s88362048.coding.me/blog/tags/index.html" data-id="cjxbylwmv000620vhbqbltv9l" class="article-share-link">分享</a>
+      <a data-url="http://s88362048.coding.me/blog/2019/02/27/TroubleInHexo/" data-id="cjxbyoss30001bwvh8tkkoigt" class="article-share-link">分享</a>
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搭建博客/">搭建博客</a></li></ul>
+
     </footer>
 
   </div>
 
   
     
+  <nav class="article-nav">
+    
+      <a href="/2019/03/09/InAntdSaveAndUploadFile/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            antd中使用upload改成点击保存后上传文件
+          
+        </div>
+      </a>
+    
+    
+  </nav>
+
 
   
   <div id="comment"></div>
+  
+    
   
 </article>
 
@@ -164,6 +195,22 @@
 </div>
 </aside>
 <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!--Leancloud 操作库:-->
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!--Valine 的核心代码库-->
+  <script src="/js/Valine.min.js"></script>
+  <script>
+      new Valine({
+          av: AV, 
+          el: '#comment',
+          app_id: 'aD00A9nKkOPshTpmdQVejH8g-gzGzoHsz',
+          app_key: 'dGCrXKxAYrJAJYpyhnjIdwRd',
+          placeholder: '说点什么吧',
+          notify: false,
+          verify: false 
+      });
+  </script>
 
 <script src="/js/lazyload.min.js"></script>
 <script src="/js/busuanzi-2.3.pure.min.js"></script>

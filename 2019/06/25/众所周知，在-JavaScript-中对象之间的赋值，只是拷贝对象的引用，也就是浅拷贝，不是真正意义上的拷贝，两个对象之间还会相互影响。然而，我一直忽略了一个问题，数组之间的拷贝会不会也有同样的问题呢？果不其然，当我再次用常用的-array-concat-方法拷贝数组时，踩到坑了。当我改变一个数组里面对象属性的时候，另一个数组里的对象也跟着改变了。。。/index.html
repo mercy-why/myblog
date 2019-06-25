@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    tags |
+    &gt;众所周知，在 JavaScript  中对象之间的赋值，只是拷贝对象的引用，也就是浅拷贝，不是真正意义上的拷贝，两个对象之间还会相互影响。然而，我一直忽略了一个问题，数组之间的拷贝会不会也有同样的问题呢？果不其然，当我再次用常用的 array.concat() 方法拷贝数组时，踩到坑了。当我改变一个数组里面对象属性的时候，另一个数组里的对象也跟着改变了。。。 |
     
     码鹿</title>
   
@@ -26,7 +26,7 @@
 <body>
 <main class="content">
   <section class="outer">
-  <article id="tags-" class="article article-type-tags" itemscope itemprop="blogPost" data-scroll-reveal>
+  <article id="post-众所周知，在-JavaScript-中对象之间的赋值，只是拷贝对象的引用，也就是浅拷贝，不是真正意义上的拷贝，两个对象之间还会相互影响。然而，我一直忽略了一个问题，数组之间的拷贝会不会也有同样的问题呢？果不其然，当我再次用常用的-array-concat-方法拷贝数组时，踩到坑了。当我改变一个数组里面对象属性的时候，另一个数组里的对象也跟着改变了。。。" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
     
@@ -34,13 +34,20 @@
         
   
     <h1 class="article-title" itemprop="name">
-      tags
+      &gt;众所周知，在 JavaScript  中对象之间的赋值，只是拷贝对象的引用，也就是浅拷贝，不是真正意义上的拷贝，两个对象之间还会相互影响。然而，我一直忽略了一个问题，数组之间的拷贝会不会也有同样的问题呢？果不其然，当我再次用常用的 array.concat() 方法拷贝数组时，踩到坑了。当我改变一个数组里面对象属性的时候，另一个数组里的对象也跟着改变了。。。
     </h1>
   
 
       </header>
     
 
+    
+      <div class="article-meta">
+        <a href="/2019/06/25/众所周知，在-JavaScript-中对象之间的赋值，只是拷贝对象的引用，也就是浅拷贝，不是真正意义上的拷贝，两个对象之间还会相互影响。然而，我一直忽略了一个问题，数组之间的拷贝会不会也有同样的问题呢？果不其然，当我再次用常用的-array-concat-方法拷贝数组时，踩到坑了。当我改变一个数组里面对象属性的时候，另一个数组里的对象也跟着改变了。。。/" class="article-date">
+  <time datetime="2019-06-25T14:24:32.000Z" itemprop="datePublished">2019-06-25</time>
+</a>
+        
+      </div>
     
 
     <div class="article-entry" itemprop="articleBody">
@@ -53,7 +60,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://s88362048.coding.me/blog/tags/index.html" data-id="cjxbylwmv000620vhbqbltv9l" class="article-share-link">分享</a>
+      <a data-url="http://s88362048.coding.me/blog/2019/06/25/众所周知，在-JavaScript-中对象之间的赋值，只是拷贝对象的引用，也就是浅拷贝，不是真正意义上的拷贝，两个对象之间还会相互影响。然而，我一直忽略了一个问题，数组之间的拷贝会不会也有同样的问题呢？果不其然，当我再次用常用的-array-concat-方法拷贝数组时，踩到坑了。当我改变一个数组里面对象属性的时候，另一个数组里的对象也跟着改变了。。。/" data-id="cjxbyosrm0000bwvh0ibhisac" class="article-share-link">分享</a>
       
     </footer>
 
@@ -61,9 +68,30 @@
 
   
     
+  <nav class="article-nav">
+    
+      <a href="/2019/06/25/js-array-clone/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            前端踩坑之数组拷贝
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/04/28/about-iview-table/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">如何在iView中动态创建表格</div>
+      </a>
+    
+  </nav>
+
 
   
   <div id="comment"></div>
+  
+    
   
 </article>
 
@@ -164,6 +192,22 @@
 </div>
 </aside>
 <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!--Leancloud 操作库:-->
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!--Valine 的核心代码库-->
+  <script src="/js/Valine.min.js"></script>
+  <script>
+      new Valine({
+          av: AV, 
+          el: '#comment',
+          app_id: 'aD00A9nKkOPshTpmdQVejH8g-gzGzoHsz',
+          app_key: 'dGCrXKxAYrJAJYpyhnjIdwRd',
+          placeholder: '说点什么吧',
+          notify: false,
+          verify: false 
+      });
+  </script>
 
 <script src="/js/lazyload.min.js"></script>
 <script src="/js/busuanzi-2.3.pure.min.js"></script>
