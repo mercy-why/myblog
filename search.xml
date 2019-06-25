@@ -48,12 +48,4 @@
         <tag>ant-design</tag>
       </tags>
   </entry>
-  <entry>
-    <title><![CDATA[用Hexo搭建博客遇到的一些坑]]></title>
-    <url>%2F2019%2F02%2F27%2FTroubleInHexo%2F</url>
-    <content type="text"><![CDATA[绑定域名绑定域名的时候每次都要在setting里添加Custom domain，然后会在仓库里自动添加一个CNAME文件， 奇怪的是，每次hexo d的时候，总会自动覆盖。 解决方法是在本地添加一个CNAME文件，写上域名，放进source文件夹，便不会被删除。 部署到github部署到github上时，总是传不上去，后来发现要先hexo g 再hexo d才行，hexo g的目的是生成静态文件。 也可以hexo d -g ocean主题的摘要最近使用了ocean主题，让我纳闷的是首页的文章直接显示全文，而没有显示摘要。查看源码后发现，如果没有 post.excerpt 的话就会显示文章全部内容，hexo会检索第一次出现&lt;!-- more --&gt;的时候，显示这部分内容为摘要。所以把&lt;!-- more --&gt;放到想放的位置即可。]]></content>
-      <tags>
-        <tag>搭建博客</tag>
-      </tags>
-  </entry>
 </search>
