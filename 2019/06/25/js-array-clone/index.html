@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="宋小宇的个人博客">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    前端踩坑之数组拷贝 |
+    
+    码鹿</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+  <link href="//at.alicdn.com/t/font_1124940_ynpgwaj6u0e.css" rel="stylesheet" type="text/css">
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-js-array-clone" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端踩坑之数组拷贝
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/06/25/js-array-clone/" class="article-date">
+  <time datetime="2019-06-25T14:25:05.000Z" itemprop="datePublished">2019-06-25</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <blockquote>
+<p>众所周知，在 JavaScript  中对象之间的赋值，只是拷贝对象的引用，也就是浅拷贝，不是真正意义上的拷贝，两个对象之间还会相互影响。然而，我一直忽略了一个问题，数组之间的拷贝会不会也有同样的问题呢？果不其然，当我再次用常用的 array.concat() 方法拷贝数组时，踩到坑了。当我改变一个数组里面对象属性的时候，另一个数组里的对象也跟着改变了。。。</p>
+</blockquote>
+<p><strong>数组的拷贝方法有很多，按结果来看就是浅拷贝和深拷贝两种。</strong><a id="more"></a></p>
+<h2 id="一、直接赋值"><a href="#一、直接赋值" class="headerlink" title="一、直接赋值"></a>一、直接赋值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let arr2 = arr1;</span><br></pre></td></tr></table></figure>
+<p>这种拷贝方法是<strong>浅拷贝</strong>，数组arr1和数组arr2共用同一内存，其中一个数组改变，另一个数组也会跟着改变。</p>
+<h2 id="二、使用-slice-，concat-，assign-方法"><a href="#二、使用-slice-，concat-，assign-方法" class="headerlink" title="二、使用 slice()，concat()，assign() 方法"></a>二、使用 slice()，concat()，assign() 方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let arr2 = arr1.slice(0);</span><br><span class="line">let arr3 = [].concat(arr1);</span><br><span class="line">let arr4 = Object.assign(&#123;&#125; , arr1);</span><br></pre></td></tr></table></figure>
+<p>这几种方法产生的效果是一样的。</p>
+<ul>
+<li>若原数组中<strong>不存在</strong>引用类型，修改新数组，<strong>不会</strong>影响到原数组的值。</li>
+<li>若原数组中<strong>存在</strong>引用类型，修改新数组，<strong>会</strong>影响到原数组的值</li>
+</ul>
+<p>原因是这样拷贝数组中<strong>非引用类型</strong>的值属于<strong>深</strong>拷贝，<strong>引入类型</strong>的值属于<strong>浅</strong>拷贝。</p>
+<h2 id="三、深拷贝方法"><a href="#三、深拷贝方法" class="headerlink" title="三、深拷贝方法"></a>三、深拷贝方法</h2><h4 id="1-JSON复制法"><a href="#1-JSON复制法" class="headerlink" title="1. JSON复制法"></a>1. JSON复制法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let arr2 = JSON.parse(JSON.stringify(arr1));</span><br></pre></td></tr></table></figure>
+<p>但是这种方式有一定的局限性，就是数组必须遵从JSON的格式，当遇到层级较深，且序列化数组不完全符合JSON格式时，使用JSON的方式进行深拷贝就会出现问题。</p>
+<p>所有函数及原型成员都会被有意忽略，不体现在结果中。此外，值为 undefined 的任何属性也都会被跳过。结果中最终都是值为有效 JSON 数据类型的实例属性。</p>
+<h4 id="2-使用递归"><a href="#2-使用递归" class="headerlink" title="2. 使用递归"></a>2. 使用递归</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function deepClone(source) &#123;</span><br><span class="line">  // 递归终止条件</span><br><span class="line">  if (!source || typeof source !== &apos;object&apos;) &#123;</span><br><span class="line">    return source;</span><br><span class="line">  &#125;</span><br><span class="line">  var targetObj = source.constructor === Array ? [] : &#123;&#125;;</span><br><span class="line">  for (var key in source) &#123;</span><br><span class="line">    if (Object.prototype.hasOwnProperty.call(source, key) &#123;</span><br><span class="line">      if (source[key] &amp;&amp; typeof source[key] === &apos;object&apos;) &#123;</span><br><span class="line">        targetObj[key] = deepClone(source[key]);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        targetObj[key] = source[key];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return targetObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于 Function 类型，这里是直接复制的，任然是共享一个内存地址。因为函数更多的是完成某些功能，对函数的更改可能就是直接重新赋值，一般情况下不考虑深拷贝。<br>上面的深拷贝只是比较简单的实现，没有考虑很复杂的情况，比如：</p>
+<ul>
+<li>其他引用类型：Function，Date，RegExp 的拷贝</li>
+<li>对象中存在循环引用(Circular references)会导致调用栈溢出</li>
+<li>通过闭包作用域来实现私有成员的这类对象不能真正的被拷贝。</li>
+</ul>
+<h4 id="3-使用lodash库"><a href="#3-使用lodash库" class="headerlink" title="3. 使用lodash库"></a>3. 使用<a href="https://www.lodashjs.com/docs/latest" target="_blank" rel="noopener">lodash</a>库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import cloneDeep from &apos;lodash/cloneDeep&apos;; </span><br><span class="line">let arr2 = cloneDeep(arr1);</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1.<a href="https://www.jianshu.com/p/12b1fa8bb768" target="_blank" rel="noopener">深入理解 JavaScript 对象和数组拷贝</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://s88362048.coding.me/blog/2019/06/25/js-array-clone/" data-id="cjxbwl5i40007gcvhj6z3zx5b" class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/04/28/about-iview-table/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">如何在iView中动态创建表格</div>
+      </a>
+    
+  </nav>
+
+
+  
+  <div id="comment"></div>
+  
+    
+  
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 码鹿</li>
+      
+      <li>
+          <a target="_blank" href="http://weibo.com/5824339649">
+                          <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-weibo"></i>
+                          </span>
+          </a>
+      </li>
+      
+
+      
+
+      
+      <li>
+          <a target="_blank" href="https://github.com/luckyRogue">
+                          <span class="fa-stack fa-lg">
+                              <i class="iconfont icon-git"></i>
+                          </span>
+          </a>
+      </li>
+      
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/cat.jpg" alt="码鹿"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="back-to-top">
+      <i class="iconfont icon-back-top"></i> <br>
+    </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!--Leancloud 操作库:-->
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!--Valine 的核心代码库-->
+  <script src="/js/Valine.min.js"></script>
+  <script>
+      new Valine({
+          av: AV, 
+          el: '#comment',
+          app_id: 'aD00A9nKkOPshTpmdQVejH8g-gzGzoHsz',
+          app_key: 'dGCrXKxAYrJAJYpyhnjIdwRd',
+          placeholder: '说点什么吧',
+          notify: false,
+          verify: false 
+      });
+  </script>
+
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/live2d-widget@3.x/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

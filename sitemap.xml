@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://s88362048.coding.me/blog/gallery/index.html</loc>
+    
+    <lastmod>2019-06-25T14:34:04.659Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://s88362048.coding.me/blog/2019/06/25/js-array-clone/</loc>
+    
+    <lastmod>2019-06-25T14:27:21.489Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://s88362048.coding.me/blog/2019/04/28/about-iview-table/</loc>
     
     <lastmod>2019-06-12T11:47:51.651Z</lastmod>
@@ -9,23 +23,9 @@
   </url>
   
   <url>
-    <loc>http://s88362048.coding.me/blog/2019/02/27/TroubleInHexo/</loc>
-    
-    <lastmod>2019-04-01T15:04:54.453Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://s88362048.coding.me/blog/2019/03/16/my-life/</loc>
     
     <lastmod>2019-04-01T14:59:36.357Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://s88362048.coding.me/blog/gallery/index.html</loc>
-    
-    <lastmod>2019-04-01T14:16:58.918Z</lastmod>
     
   </url>
   
