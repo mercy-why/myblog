@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/04/28/about-iview-table/</loc>
+    
+    <lastmod>2019-08-04T05:40:36.435Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/gallery/index.html</loc>
     
     <lastmod>2019-06-25T14:34:04.659Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://yoursite.com/2019/06/25/js-array-clone/</loc>
     
     <lastmod>2019-06-25T14:27:21.489Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/04/28/about-iview-table/</loc>
-    
-    <lastmod>2019-06-12T11:47:51.651Z</lastmod>
     
   </url>
   
