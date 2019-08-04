@@ -125,9 +125,28 @@
 
 
   
-  <div id="comment"></div>
   
     
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: '532e2aeac964f68d6ce1',
+      clientSecret: '7039e59ad4477d3d69ed56377e6ab5d652b42104',
+      repo: 'hexo_commit',
+      owner: 'luckyRogue',
+      admin: ['luckyRogue'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
   
 </article>
 
@@ -229,21 +248,7 @@
 </aside>
 <script src="/js/jquery-2.0.3.min.js"></script>
 
-  <!--Leancloud 操作库:-->
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <!--Valine 的核心代码库-->
-  <script src="/js/Valine.min.js"></script>
-  <script>
-      new Valine({
-          av: AV, 
-          el: '#comment',
-          app_id: 'aD00A9nKkOPshTpmdQVejH8g-gzGzoHsz',
-          app_key: 'dGCrXKxAYrJAJYpyhnjIdwRd',
-          placeholder: '说点什么吧',
-          notify: false,
-          verify: false 
-      });
-  </script>
+
 
 <script src="/js/lazyload.min.js"></script>
 <script src="/js/busuanzi-2.3.pure.min.js"></script>
