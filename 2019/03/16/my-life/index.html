@@ -127,12 +127,12 @@
     var gitalk = new Gitalk({
       clientID: '532e2aeac964f68d6ce1',
       clientSecret: '7039e59ad4477d3d69ed56377e6ab5d652b42104',
-      repo: 'hexo_commit',
+      repo: 'hexo_comment',
       owner: 'luckyRogue',
       admin: ['luckyRogue'],
       // id: location.pathname,      // Ensure uniqueness and length less than 50
       id: md5(location.pathname),
-      distractionFreeMode: false,  // Facebook-like distraction free mode
+      distractionFreeMode: true,  // Facebook-like distraction free mode
       pagerDirection: 'last'
     })
 
