@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="宋小宇的个人博客">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    react-to-print |
+    
+    码鹿</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+  <link href="//at.alicdn.com/t/font_1124940_ynpgwaj6u0e.css" rel="stylesheet" type="text/css">
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-react-to-print" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      react-to-print
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/10/14/react-to-print/" class="article-date">
+  <time datetime="2019-10-14T12:22:57.000Z" itemprop="datePublished">2019-10-14</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <p><em>我们知道，window.print()可以调起打印功能，但是直接用window.print()如果直接打印的话，没有样式，而且默认打印的是整个网页的内容。解决的方法<a id="more"></a>可以用iframe方式引入需要打印的区域，并把样式添加进去，然后把iframe标签定位到看不到的地方去。搜了一下，已经有人造好了轮子，<a href="https://github.com/gregnb/react-to-print" target="_blank" rel="noopener">react-to-print</a>插件就是这么做的。</em></p>
+<hr>
+<h4 id="一-使用方法"><a href="#一-使用方法" class="headerlink" title="一.使用方法"></a>一.使用方法</h4><ol>
+<li>下载 <code>npm install --save react-to-print</code></li>
+<li>引用 <code>import ReactToPrint from &#39;react-to-print&#39;;</code></li>
+<li>调用 </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//触发按钮</span><br><span class="line">&lt;ReactToPrint</span><br><span class="line">         trigger=&#123;() =&gt; &lt;a href=&quot;#&quot;&gt;点此打印&lt;/a&gt;&#125;</span><br><span class="line">         content=&#123;() =&gt; this.componentRef&#125;</span><br><span class="line">       /&gt;</span><br><span class="line"> //打印内容</span><br><span class="line"> &lt;div ref=&#123;el =&gt; (this.componentRef = el)&#125;&gt;</span><br><span class="line">           ....内容</span><br><span class="line"> &lt;div/&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="二-组件参数"><a href="#二-组件参数" class="headerlink" title="二.组件参数"></a>二.组件参数</h4><h5 id><a href="#" class="headerlink" title></a><reacttoprint></reacttoprint></h5><p>该组件接受以下参数（注意：<code>?</code>表示可选参数）：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>trigger</code></strong></td>
+<td><code>function</code></td>
+<td>返回React组件或HTML元素的函数</td>
+</tr>
+<tr>
+<td><strong><code>content</code></strong></td>
+<td>function</td>
+<td>返回组件参考值的函数。然后将该参考值的内容用于打印</td>
+</tr>
+<tr>
+<td><strong><code>copyStyles</code></strong></td>
+<td>boolean?</td>
+<td>将所有<code>&lt;style&gt;</code>和<code>&lt;link type=&quot;stylesheet&quot; /&gt;</code>标签从<code>&lt;head&gt;</code>父窗口内部复制到打印窗口。（默认值：<code>true</code>）</td>
+</tr>
+<tr>
+<td><strong><code>onBeforeGetContent</code></strong></td>
+<td><code>function?</code></td>
+<td>在库收集页面内容之前触发的回调函数。返回void或Promise。可用于在打印之前更改页面上的内容。</td>
+</tr>
+<tr>
+<td><strong><code>onBeforePrint</code></strong></td>
+<td><code>function?</code></td>
+<td>打印前触发的回调功能。返回void或Promise。注意：此功能在打印之前立即运行，但在收集页面内容之后才运行。要在打印之前修改内容，请<code>onBeforeGetContent</code>改用。</td>
+</tr>
+<tr>
+<td><strong><code>onAfterPrint</code></strong></td>
+<td><code>function?</code></td>
+<td>打印后触发的回调功能</td>
+</tr>
+<tr>
+<td><strong><code>onPrintError</code></strong></td>
+<td><code>function(errorLocation: string, error: Error)?</code></td>
+<td>如果打印错误严重到无法继续打印，将调用的回调函数。目前仅限于<code>onBeforeGetContent</code>或中的Promise拒绝<code>onBeforePrint</code>。使用它尝试再次打印。<code>errorLocation</code>会告诉您Promise在哪个回调中被拒绝。</td>
+</tr>
+<tr>
+<td><strong><code>removeAfterPrint</code></strong></td>
+<td><code>boolean?</code></td>
+<td>执行操作后，卸下打印iframe。默认为<code>false</code>。</td>
+</tr>
+<tr>
+<td><strong><code>pageStyle</code></strong></td>
+<td><code>string?</code></td>
+<td>覆盖默认的打印窗口样式</td>
+</tr>
+<tr>
+<td><strong><code>bodyClass</code></strong></td>
+<td><code>string?</code></td>
+<td>传递给打印窗口主体的类</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://codedeer.cn/2019/10/14/react-to-print/" data-id="ck1qe2mii0007iwvh96fieavr" class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/06/25/js-array-clone/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">前端踩坑之数组拷贝</div>
+      </a>
+    
+  </nav>
+
+
+  
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: '764fd74bf7b7eed4de54',
+      clientSecret: 'cc0c989a5b888b759f082d6e5a24be80fceb33be',
+      repo: 'hexo_comment',
+      owner: 'luckyRogue',
+      admin: ['luckyRogue'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: true,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 码鹿</li>
+      
+      <li>
+          <a target="_blank" href="http://weibo.com/5824339649">
+                          <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-weibo"></i>
+                          </span>
+          </a>
+      </li>
+      
+
+      
+
+      
+      <li>
+          <a target="_blank" href="https://github.com/luckyRogue">
+                          <span class="fa-stack fa-lg">
+                              <i class="iconfont icon-git"></i>
+                          </span>
+          </a>
+      </li>
+      
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/cat.jpg" alt="码鹿"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="back-to-top">
+      <i class="iconfont icon-back-top"></i> <br>
+    </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/live2d-widget@3.x/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
