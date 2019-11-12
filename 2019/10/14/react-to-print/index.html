@@ -65,21 +65,6 @@
 
     
     
-<script>
-var _hmt = _hmt || [];
-(function() {
-    var hm = document.createElement("script");
-    hm.src = "//hm.baidu.com/hm.js?d8c0a4185322e94013582201484f9131";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-    
-    
-
-    
-    
 <link rel="stylesheet" href="/css/progressbar.css">
 <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
 
@@ -108,7 +93,9 @@ var _hmt = _hmt || [];
                 
                 <a class="navbar-item" href="/categories">分类</a>
                 
-                <a class="navbar-item" href="/archives">归档</a>
+                <a class="navbar-item" href="/gallery">照片集</a>
+                
+                <a class="navbar-item" href="/archives">时间轴</a>
                 
                 <a class="navbar-item" href="/tags">标签</a>
                 
@@ -170,7 +157,7 @@ var _hmt = _hmt || [];
 <li>引用 <code>import ReactToPrint from &#39;react-to-print&#39;;</code></li>
 <li>调用 </li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//触发按钮</span><br><span class="line">&lt;ReactToPrint</span><br><span class="line">         trigger=&#123;() =&gt; &lt;a href=&quot;#&quot;&gt;点此打印&lt;/a&gt;&#125;</span><br><span class="line">         content=&#123;() =&gt; this.componentRef&#125;</span><br><span class="line">       /&gt;</span><br><span class="line"> //打印内容</span><br><span class="line"> &lt;div ref=&#123;el =&gt; (this.componentRef = el)&#125;&gt;</span><br><span class="line">           ....内容</span><br><span class="line"> &lt;div/&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//触发按钮</span><br><span class="line">&lt;ReactToPrint</span><br><span class="line">         trigger=&#123;() =&gt; &lt;a href=&quot;#&quot;&gt;点此打印&lt;/a&gt;&#125;</span><br><span class="line">         content=&#123;() =&gt; this.componentRef&#125;</span><br><span class="line">       /&gt;</span><br><span class="line"> //打印内容</span><br><span class="line"> &lt;div ref=&#123;el =&gt; (this.componentRef = el)&#125;&gt;</span><br><span class="line">           ....内容</span><br><span class="line"> &lt;div/&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="二-组件参数"><a href="#二-组件参数" class="headerlink" title="二.组件参数"></a>二.组件参数</h4><h5 id><a href="#" class="headerlink" title></a><reacttoprint></reacttoprint></h5><p>该组件接受以下参数（注意：<code>?</code>表示可选参数）：</p>
 <table>
 <thead>
@@ -254,6 +241,13 @@ var _hmt = _hmt || [];
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/12/draggable/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">在vue中实现拖拽功能</span>
+            </a>
+        </div>
+        
         
         <div class="level-end">
             <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/25/js-array-clone/">
@@ -325,7 +319,7 @@ var _hmt = _hmt || [];
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        7
+                        8
                     </p>
                 </div>
             </div>
@@ -507,26 +501,6 @@ function myHideElement(name) {
 
     
     
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-
-</script>
-
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
     
     
 
@@ -536,11 +510,6 @@ MathJax.Hub.Queue(function() {
 <script src="/js/back-to-top.js" defer></script>
 
 
-    
-    
-
-    
-    
     
     
 
@@ -582,5 +551,5 @@ MathJax.Hub.Queue(function() {
 <!--<link rel="stylesheet" href="/css/search.css">-->
 <!--<link rel="stylesheet" href="/css/insight.css">-->
     
-<script src="https://cdn.jsdelivr.net/npm/live2d-widget@3.x/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</body>
 </html>

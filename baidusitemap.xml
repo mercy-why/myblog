@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://codedeer.cn/2019/11/12/draggable/</loc>
+    <lastmod>2019-11-12</lastmod>
+  </url>  <url>
+    <loc>https://codedeer.cn/2019/03/16/my-life/</loc>
+    <lastmod>2019-11-12</lastmod>
+  </url>  <url>
     <loc>https://codedeer.cn/2019/10/14/react-to-print/</loc>
     <lastmod>2019-10-14</lastmod>
   </url>  <url>
@@ -9,9 +15,6 @@
   </url>  <url>
     <loc>https://codedeer.cn/2019/06/25/js-array-clone/</loc>
     <lastmod>2019-06-25</lastmod>
-  </url>  <url>
-    <loc>https://codedeer.cn/2019/03/16/my-life/</loc>
-    <lastmod>2019-04-01</lastmod>
   </url>  <url>
     <loc>https://codedeer.cn/2019/03/25/npm-publish/</loc>
     <lastmod>2019-03-31</lastmod>

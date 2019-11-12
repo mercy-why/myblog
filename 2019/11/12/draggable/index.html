@@ -2,23 +2,25 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>前端踩坑之数组拷贝 - 码鹿</title>
+<title>在vue中实现拖拽功能 - 码鹿</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="众所周知，在 JavaScript  中对象之间的赋值，只是拷贝对象的引用，也就是浅拷贝，不是真正意义上的拷贝，两个对象之间还会相互影响。然而，我一直忽略了一个问题，数组之间的拷贝会不会也有同样的问题呢？果不其然，当我再次用常用的 array.concat() 方法拷贝数组时，踩到坑了。当我改变一个数组里面对象属性的时候，另一个数组里的对象也跟着改变了。。。  数组的拷贝方法有很多，按结果来看就">
-<meta name="keywords" content="JavaScript">
+    <meta name="description" content="需求很简单，拖动框框或者数字来调整顺序。如下图">
+<meta name="keywords" content="vue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端踩坑之数组拷贝">
-<meta property="og:url" content="https://codedeer.cn/2019/06/25/js-array-clone/index.html">
+<meta property="og:title" content="在vue中实现拖拽功能">
+<meta property="og:url" content="https://codedeer.cn/2019/11/12/draggable/index.html">
 <meta property="og:site_name" content="码鹿">
-<meta property="og:description" content="众所周知，在 JavaScript  中对象之间的赋值，只是拷贝对象的引用，也就是浅拷贝，不是真正意义上的拷贝，两个对象之间还会相互影响。然而，我一直忽略了一个问题，数组之间的拷贝会不会也有同样的问题呢？果不其然，当我再次用常用的 array.concat() 方法拷贝数组时，踩到坑了。当我改变一个数组里面对象属性的时候，另一个数组里的对象也跟着改变了。。。  数组的拷贝方法有很多，按结果来看就">
+<meta property="og:description" content="需求很简单，拖动框框或者数字来调整顺序。如下图">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-25T14:27:21.489Z">
+<meta property="og:image" content="https://codedeer.cn/img/drag.png">
+<meta property="og:updated_time" content="2019-11-12T14:36:37.258Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端踩坑之数组拷贝">
-<meta name="twitter:description" content="众所周知，在 JavaScript  中对象之间的赋值，只是拷贝对象的引用，也就是浅拷贝，不是真正意义上的拷贝，两个对象之间还会相互影响。然而，我一直忽略了一个问题，数组之间的拷贝会不会也有同样的问题呢？果不其然，当我再次用常用的 array.concat() 方法拷贝数组时，踩到坑了。当我改变一个数组里面对象属性的时候，另一个数组里的对象也跟着改变了。。。  数组的拷贝方法有很多，按结果来看就">
+<meta name="twitter:title" content="在vue中实现拖拽功能">
+<meta name="twitter:description" content="需求很简单，拖动框框或者数字来调整顺序。如下图">
+<meta name="twitter:image" content="https://codedeer.cn/img/drag.png">
 
 
 
@@ -80,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <!-- <img src="/images/logo.png" alt="前端踩坑之数组拷贝" height="28"> -->
+                <!-- <img src="/images/logo.png" alt="在vue中实现拖拽功能" height="28"> -->
                 <span class="navbar-title"> codedeer's blog </span>
             
             </a>
@@ -128,21 +130,21 @@
         <div class="my-title  my-post-title ">
             <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
                 
-                    前端踩坑之数组拷贝
+                    在vue中实现拖拽功能
                 
             </h1>
             <div class="level article-meta is-size-7 is-mobile is-overflow-x-auto">
                 <div class="level-left">
                     <i class="far fa-clock"></i>
-                    <time class="level-item has-text-grey" datetime="2019-06-25T14:25:05.000Z">
-                        2019-06-25
+                    <time class="level-item has-text-grey" datetime="2019-11-12T14:28:08.000Z">
+                        2019-11-12
                     </time>
                     <i class="far fa-folder"></i>
                     
                     <i class="far fa-edit"></i>
                     
                         <span class="level-item has-text-grey">
-                            781 Words
+                            293 Words
                         </span>
                     
                 </div>
@@ -150,31 +152,15 @@
         </div>
         
         <div class="content">
-            <blockquote>
-<p>众所周知，在 JavaScript  中对象之间的赋值，只是拷贝对象的引用，也就是浅拷贝，不是真正意义上的拷贝，两个对象之间还会相互影响。然而，我一直忽略了一个问题，数组之间的拷贝会不会也有同样的问题呢？果不其然，当我再次用常用的 array.concat() 方法拷贝数组时，踩到坑了。当我改变一个数组里面对象属性的时候，另一个数组里的对象也跟着改变了。。。</p>
-</blockquote>
-<p><strong>数组的拷贝方法有很多，按结果来看就是浅拷贝和深拷贝两种。</strong><a id="more"></a></p>
-<h2 id="一、直接赋值"><a href="#一、直接赋值" class="headerlink" title="一、直接赋值"></a>一、直接赋值</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let arr2 = arr1;</span><br></pre></td></tr></table></figure>
-<p>这种拷贝方法是<strong>浅拷贝</strong>，数组arr1和数组arr2共用同一内存，其中一个数组改变，另一个数组也会跟着改变。</p>
-<h2 id="二、使用-slice-，concat-，assign-方法"><a href="#二、使用-slice-，concat-，assign-方法" class="headerlink" title="二、使用 slice()，concat()，assign() 方法"></a>二、使用 slice()，concat()，assign() 方法</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let arr2 = arr1.slice(0);</span><br><span class="line">let arr3 = [].concat(arr1);</span><br><span class="line">let arr4 = Object.assign(&#123;&#125; , arr1);</span><br></pre></td></tr></table></figure>
-<p>这几种方法产生的效果是一样的。</p>
+            <p><em>需求很简单，拖动框框或者数字来调整顺序。如下图</em><br><img src="/img/drag.png" alt><br><a id="more"></a></p>
+<hr>
+<h4 id="一、找轮子"><a href="#一、找轮子" class="headerlink" title="一、找轮子"></a>一、找轮子</h4><p>在网上搜了一会发现一个好用的插件——<a href="https://github.com/Vivify-Ideas/vue-draggable" target="_blank" rel="noopener">vue-draggable</a></p>
+<h4 id="二、使用方法"><a href="#二、使用方法" class="headerlink" title="二、使用方法"></a>二、使用方法</h4><p>1.安装<br><code>npm i -S vuedraggable</code><br>2.引用<br><code>import draggable from &#39;vuedraggable&#39;</code><br>3.实现需求<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;dragbox&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;note&quot;&gt;拖动题型或题号调整顺序&lt;/div&gt;</span><br><span class="line">    &lt;draggable v-model=&quot;list&quot; v-bind=&quot;firstDragOptions&quot; @change=&quot;changeTitle&quot;&gt;</span><br><span class="line">      &lt;transition-group&gt;</span><br><span class="line">        &lt;div class=&quot;titleBox&quot; v-for=&quot;(item,index) in list&quot; :key=&quot;index&quot;&gt;</span><br><span class="line">          &lt;div class=&quot;firstTitle&quot;&gt;&#123;&#123;item.firstTitle&#125;&#125;&lt;/div&gt;</span><br><span class="line">          &lt;draggable v-model=&quot;item.secondTitle&quot; @change=&quot;changeNum&quot; v-bind=&quot;secondDragOptions&quot; :group=&quot;&apos;changeNum&apos;+index&quot;&gt;</span><br><span class="line">            &lt;transition-group&gt;</span><br><span class="line">              &lt;div class=&quot;secondTitle&quot; v-for=&quot;(title,key) in item.secondTitle&quot; :key=&quot;key&quot;&gt;</span><br><span class="line">                &lt;span class=&quot;num&quot;&gt;&#123;&#123;title&#125;&#125;&lt;/span&gt;</span><br><span class="line">              &lt;/div&gt;</span><br><span class="line">            &lt;/transition-group&gt;</span><br><span class="line">          &lt;/draggable&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/transition-group&gt;</span><br><span class="line">    &lt;/draggable&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import draggable from &quot;vuedraggable&quot;;</span><br><span class="line">import cloneDeep from &quot;lodash/cloneDeep&quot;;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  name: &quot;DragComponent&quot;,</span><br><span class="line">  components: &#123; draggable &#125;,</span><br><span class="line">  props: [&quot;dragTitles&quot;],</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      list: []</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    firstDragOptions() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        group: &quot;changeTitle&quot;,</span><br><span class="line">        animation: 200,</span><br><span class="line">        disabled: false,</span><br><span class="line">        ghostClass: &quot;ghost&quot;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">     secondDragOptions() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        animation: 200,</span><br><span class="line">        disabled: false,</span><br><span class="line">        ghostClass: &quot;ghost2&quot;</span><br><span class="line">      &#125;;</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  created() &#123;</span><br><span class="line">    this.list = cloneDeep(this.dragTitles);</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    changeTitle(evt) &#123;</span><br><span class="line">      console.log(&quot;this.list: &quot;, this.list);</span><br><span class="line">    &#125;,</span><br><span class="line">    changeNum(evt) &#123;</span><br><span class="line">      console.log(&quot;this.list: &quot;, this.list);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang=&quot;scss&quot; scoped&gt;</span><br><span class="line">.dragbox &#123;</span><br><span class="line">  padding: 0 10px;</span><br><span class="line">&#125;</span><br><span class="line">.note &#123;</span><br><span class="line">  color: #999999;</span><br><span class="line">  font-size: 14px;</span><br><span class="line">&#125;</span><br><span class="line">.titleBox &#123;</span><br><span class="line">  height: 116px;</span><br><span class="line">  padding: 10px 20px;</span><br><span class="line">  border: 1px dashed #999;</span><br><span class="line">  margin-top: 20px;</span><br><span class="line">&#125;</span><br><span class="line">.firstTitle &#123;</span><br><span class="line">  font-size: 16px;</span><br><span class="line">  color: #000;</span><br><span class="line">&#125;</span><br><span class="line">.secondTitle &#123;</span><br><span class="line">  width: 40px;</span><br><span class="line">  height: 40px;</span><br><span class="line">  border: 1px solid rgb(0, 153, 255);</span><br><span class="line">  border-radius: 6px;</span><br><span class="line">  line-height: 40px;</span><br><span class="line">  text-align: center;</span><br><span class="line">  margin-top: 20px;</span><br><span class="line">  font-size: 14px;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  margin-right: 10px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<p>4.注意事项</p>
 <ul>
-<li>若原数组中<strong>不存在</strong>引用类型，修改新数组，<strong>不会</strong>影响到原数组的值。</li>
-<li>若原数组中<strong>存在</strong>引用类型，修改新数组，<strong>会</strong>影响到原数组的值</li>
+<li>group属性相同的话可以互相拖拽，故不想互相拖拽的话，要分开设置。比如我用<code>:group=&quot;&#39;changeNum&#39;+index&quot;</code>使每个框的数字互不干扰。</li>
+<li>父组件传过来的数据不能直接双向绑定，可以克隆一下数据再绑定。</li>
 </ul>
-<p>原因是这样拷贝数组中<strong>非引用类型</strong>的值属于<strong>深</strong>拷贝，<strong>引入类型</strong>的值属于<strong>浅</strong>拷贝。</p>
-<h2 id="三、深拷贝方法"><a href="#三、深拷贝方法" class="headerlink" title="三、深拷贝方法"></a>三、深拷贝方法</h2><h4 id="1-JSON复制法"><a href="#1-JSON复制法" class="headerlink" title="1. JSON复制法"></a>1. JSON复制法</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let arr2 = JSON.parse(JSON.stringify(arr1));</span><br></pre></td></tr></table></figure>
-<p>但是这种方式有一定的局限性，就是数组必须遵从JSON的格式，当遇到层级较深，且序列化数组不完全符合JSON格式时，使用JSON的方式进行深拷贝就会出现问题。</p>
-<p>所有函数及原型成员都会被有意忽略，不体现在结果中。此外，值为 undefined 的任何属性也都会被跳过。结果中最终都是值为有效 JSON 数据类型的实例属性。</p>
-<h4 id="2-使用递归"><a href="#2-使用递归" class="headerlink" title="2. 使用递归"></a>2. 使用递归</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function deepClone(source) &#123;</span><br><span class="line">  // 递归终止条件</span><br><span class="line">  if (!source || typeof source !== &apos;object&apos;) &#123;</span><br><span class="line">    return source;</span><br><span class="line">  &#125;</span><br><span class="line">  var targetObj = source.constructor === Array ? [] : &#123;&#125;;</span><br><span class="line">  for (var key in source) &#123;</span><br><span class="line">    if (Object.prototype.hasOwnProperty.call(source, key) &#123;</span><br><span class="line">      if (source[key] &amp;&amp; typeof source[key] === &apos;object&apos;) &#123;</span><br><span class="line">        targetObj[key] = deepClone(source[key]);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        targetObj[key] = source[key];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return targetObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对于 Function 类型，这里是直接复制的，任然是共享一个内存地址。因为函数更多的是完成某些功能，对函数的更改可能就是直接重新赋值，一般情况下不考虑深拷贝。<br>上面的深拷贝只是比较简单的实现，没有考虑很复杂的情况，比如：</p>
-<ul>
-<li>其他引用类型：Function，Date，RegExp 的拷贝</li>
-<li>对象中存在循环引用(Circular references)会导致调用栈溢出</li>
-<li>通过闭包作用域来实现私有成员的这类对象不能真正的被拷贝。</li>
-</ul>
-<h4 id="3-使用lodash库"><a href="#3-使用lodash库" class="headerlink" title="3. 使用lodash库"></a>3. 使用<a href="https://www.lodashjs.com/docs/latest" target="_blank" rel="noopener">lodash</a>库</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import cloneDeep from &apos;lodash/cloneDeep&apos;; </span><br><span class="line">let arr2 = cloneDeep(arr1);</span><br></pre></td></tr></table></figure>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1.<a href="https://www.jianshu.com/p/12b1fa8bb768" target="_blank" rel="noopener">深入理解 JavaScript 对象和数组拷贝</a></p>
 
         </div>
         
@@ -182,7 +168,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
-                    <a class="my-post-tag has-link-grey -link" href="/tags/JavaScript/">JavaScript</a>
+                    <a class="my-post-tag has-link-grey -link" href="/tags/vue/">vue</a>
                 </div>
             </div>
         </div>
@@ -196,17 +182,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/14/react-to-print/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">在react中实现打印功能</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/04/28/about-iview-table/">
-                <span class="level-item">如何在iView中动态创建表格</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/14/react-to-print/">
+                <span class="level-item">在react中实现打印功能</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -317,33 +296,13 @@
                 目录
             </h3>
             <ul class="menu-list"><li>
-        <a class="is-flex" href="#一、直接赋值">
+        <a class="is-flex" href="#一、找轮子">
         <span class="has-mr-6">1</span>
-        <span>一、直接赋值</span>
+        <span>一、找轮子</span>
         </a></li><li>
-        <a class="is-flex" href="#二、使用-slice-，concat-，assign-方法">
+        <a class="is-flex" href="#二、使用方法">
         <span class="has-mr-6">2</span>
-        <span>二、使用 slice()，concat()，assign() 方法</span>
-        </a></li><li>
-        <a class="is-flex" href="#三、深拷贝方法">
-        <span class="has-mr-6">3</span>
-        <span>三、深拷贝方法</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#1-JSON复制法">
-        <span class="has-mr-6">3.1</span>
-        <span>1. JSON复制法</span>
-        </a></li><li>
-        <a class="is-flex" href="#2-使用递归">
-        <span class="has-mr-6">3.2</span>
-        <span>2. 使用递归</span>
-        </a></li><li>
-        <a class="is-flex" href="#3-使用lodash库">
-        <span class="has-mr-6">3.3</span>
-        <span>3. 使用lodash库</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#参考">
-        <span class="has-mr-6">4</span>
-        <span>参考</span>
+        <span>二、使用方法</span>
         </a></li></ul>
         </div>
     </div>
@@ -385,7 +344,7 @@ function myHideElement(name) {
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 <!-- 
-                    <img src="/images/logo.png" alt="前端踩坑之数组拷贝" height="28">
+                    <img src="/images/logo.png" alt="在vue中实现拖拽功能" height="28">
                     codedeer's blog
                  -->
                 </a>

@@ -65,21 +65,6 @@
 
     
     
-<script>
-var _hmt = _hmt || [];
-(function() {
-    var hm = document.createElement("script");
-    hm.src = "//hm.baidu.com/hm.js?d8c0a4185322e94013582201484f9131";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-    
-    
-
-    
-    
 <link rel="stylesheet" href="/css/progressbar.css">
 <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
 
@@ -108,7 +93,9 @@ var _hmt = _hmt || [];
                 
                 <a class="navbar-item" href="/categories">分类</a>
                 
-                <a class="navbar-item" href="/archives">归档</a>
+                <a class="navbar-item" href="/gallery">照片集</a>
+                
+                <a class="navbar-item" href="/archives">时间轴</a>
                 
                 <a class="navbar-item" href="/tags">标签</a>
                 
@@ -164,11 +151,11 @@ var _hmt = _hmt || [];
         
         <div class="content">
             <p><i>公司项目的UI框架用的是antd，最近有一个上传jar包的需求，需要点击保存后，和表单一起上传到一个地址。<br>但Upload组件默认是选择文件后立即上传文件。如何实现呢？</i><a id="more"></a></p>
-<h3 id="一、双向绑定表单"><a href="#一、双向绑定表单" class="headerlink" title="一、双向绑定表单"></a>一、双向绑定表单</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> &lt;Form.Item label=<span class="string">"file"</span>&gt;</span><br><span class="line">    &#123;getFieldDecorator(<span class="string">'file'</span>, &#123;</span><br><span class="line">        rules: [&#123;<span class="attr">required</span>: <span class="literal">true</span>&#125;]</span><br><span class="line">            &#125;)(</span><br><span class="line">            &lt;Upload beforeUpload=&#123;beforeUpload&#125;&gt;</span><br><span class="line">                &lt;Button&gt;</span><br><span class="line">                &lt;Icon type=<span class="string">"upload"</span> /&gt; Click to Upload</span><br><span class="line">                &lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>Upload&gt;,</span><br><span class="line">          )&#125;</span><br><span class="line">&lt;<span class="regexp">/Form.Item&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="二、阻止默认提交"><a href="#二、阻止默认提交" class="headerlink" title="二、阻止默认提交"></a>二、阻止默认提交</h3><p>beforeUpload 返回 false 后，可以手动上传文件。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> beforeUpload = <span class="function">(<span class="params">file</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></p>
-<h3 id="三、创建一个formData对象实例"><a href="#三、创建一个formData对象实例" class="headerlink" title="三、创建一个formData对象实例"></a>三、创建一个formData对象实例</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> formData = <span class="keyword">new</span> FormData();</span><br></pre></td></tr></table></figure>
-<h3 id="四、把表单里的数据添加进去"><a href="#四、把表单里的数据添加进去" class="headerlink" title="四、把表单里的数据添加进去"></a>四、把表单里的数据添加进去</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> data = props.form.getFieldsValue();</span><br><span class="line">formData.append(<span class="string">'file'</span>,data.file);</span><br></pre></td></tr></table></figure>
-<h3 id="五、发送数据到后台"><a href="#五、发送数据到后台" class="headerlink" title="五、发送数据到后台"></a>五、发送数据到后台</h3><p>记得设置Content-Type<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  Axios(&#123;</span><br><span class="line">    headers: &#123;</span><br><span class="line">      <span class="string">'Content-Type'</span>: <span class="string">'multipart/form-data'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    method: <span class="string">'post'</span>,</span><br><span class="line">    data: formData,</span><br><span class="line">    url: <span class="string">'http://...'</span></span><br><span class="line">  &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'res'</span>, res)</span><br><span class="line">  &#125;, err =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'err'</span>, err)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="一、双向绑定表单"><a href="#一、双向绑定表单" class="headerlink" title="一、双向绑定表单"></a>一、双向绑定表单</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> &lt;Form.Item label=<span class="hljs-string">"file"</span>&gt;</span><br><span class="line">    &#123;getFieldDecorator(<span class="hljs-string">'file'</span>, &#123;</span><br><span class="line">        rules: [&#123;<span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>&#125;]</span><br><span class="line">            &#125;)(</span><br><span class="line">            &lt;Upload beforeUpload=&#123;beforeUpload&#125;&gt;</span><br><span class="line">                &lt;Button&gt;</span><br><span class="line">                &lt;Icon type=<span class="hljs-string">"upload"</span> /&gt; Click to Upload</span><br><span class="line">                &lt;<span class="hljs-regexp">/Button&gt;</span></span><br><span class="line"><span class="hljs-regexp">            &lt;/</span>Upload&gt;,</span><br><span class="line">          )&#125;</span><br><span class="line">&lt;<span class="hljs-regexp">/Form.Item&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="二、阻止默认提交"><a href="#二、阻止默认提交" class="headerlink" title="二、阻止默认提交"></a>二、阻止默认提交</h3><p>beforeUpload 返回 false 后，可以手动上传文件。<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> beforeUpload = <span class="hljs-function">(<span class="hljs-params">file</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></p>
+<h3 id="三、创建一个formData对象实例"><a href="#三、创建一个formData对象实例" class="headerlink" title="三、创建一个formData对象实例"></a>三、创建一个formData对象实例</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> formData = <span class="hljs-keyword">new</span> FormData();</span><br></pre></td></tr></table></figure>
+<h3 id="四、把表单里的数据添加进去"><a href="#四、把表单里的数据添加进去" class="headerlink" title="四、把表单里的数据添加进去"></a>四、把表单里的数据添加进去</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> data = props.form.getFieldsValue();</span><br><span class="line">formData.append(<span class="hljs-string">'file'</span>,data.file);</span><br></pre></td></tr></table></figure>
+<h3 id="五、发送数据到后台"><a href="#五、发送数据到后台" class="headerlink" title="五、发送数据到后台"></a>五、发送数据到后台</h3><p>记得设置Content-Type<br><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  Axios(&#123;</span><br><span class="line">    headers: &#123;</span><br><span class="line">      <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'multipart/form-data'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    method: <span class="hljs-string">'post'</span>,</span><br><span class="line">    data: formData,</span><br><span class="line">    url: <span class="hljs-string">'http://...'</span></span><br><span class="line">  &#125;).then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'res'</span>, res)</span><br><span class="line">  &#125;, err =&gt; &#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'err'</span>, err)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
         </div>
         
@@ -261,7 +248,7 @@ var _hmt = _hmt || [];
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        7
+                        8
                     </p>
                 </div>
             </div>
@@ -451,26 +438,6 @@ function myHideElement(name) {
 
     
     
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-
-</script>
-
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
     
     
 
@@ -480,11 +447,6 @@ MathJax.Hub.Queue(function() {
 <script src="/js/back-to-top.js" defer></script>
 
 
-    
-    
-
-    
-    
     
     
 
@@ -526,5 +488,5 @@ MathJax.Hub.Queue(function() {
 <!--<link rel="stylesheet" href="/css/search.css">-->
 <!--<link rel="stylesheet" href="/css/insight.css">-->
     
-<script src="https://cdn.jsdelivr.net/npm/live2d-widget@3.x/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</body>
 </html>
