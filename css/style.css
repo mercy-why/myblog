@@ -679,14 +679,6 @@ code {
 .card {
   border-radius: 2px;
 }
-/* 设置鼠标样式 */
-* {
-  cursor: url("/cur/default.cur"), default !important;
-}
-a:hover,
-button {
-  cursor: url("/cur/pointer.cur"), pointer !important;
-}
 /* 为自己的博文中对歌词的引用而特殊准备的 */
 .lyrics {
   color: #888;

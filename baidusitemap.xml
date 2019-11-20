@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://codedeer.cn/2019/11/12/draggable/</loc>
-    <lastmod>2019-11-12</lastmod>
-  </url>  <url>
-    <loc>https://codedeer.cn/2019/03/16/my-life/</loc>
-    <lastmod>2019-11-12</lastmod>
-  </url>  <url>
     <loc>https://codedeer.cn/2019/10/14/react-to-print/</loc>
-    <lastmod>2019-10-14</lastmod>
-  </url>  <url>
-    <loc>https://codedeer.cn/2019/04/28/about-iview-table/</loc>
-    <lastmod>2019-08-04</lastmod>
-  </url>  <url>
-    <loc>https://codedeer.cn/2019/06/25/js-array-clone/</loc>
-    <lastmod>2019-06-25</lastmod>
+    <lastmod>2019-11-20</lastmod>
   </url>  <url>
     <loc>https://codedeer.cn/2019/03/25/npm-publish/</loc>
-    <lastmod>2019-03-31</lastmod>
+    <lastmod>2019-11-20</lastmod>
+  </url>  <url>
+    <loc>https://codedeer.cn/2019/03/16/my-life/</loc>
+    <lastmod>2019-11-20</lastmod>
+  </url>  <url>
+    <loc>https://codedeer.cn/2019/06/25/js-array-clone/</loc>
+    <lastmod>2019-11-20</lastmod>
   </url>  <url>
     <loc>https://codedeer.cn/2019/03/09/InAntdSaveAndUploadFile/</loc>
-    <lastmod>2019-03-31</lastmod>
+    <lastmod>2019-11-20</lastmod>
+  </url>  <url>
+    <loc>https://codedeer.cn/2019/11/12/draggable/</loc>
+    <lastmod>2019-11-20</lastmod>
   </url>  <url>
     <loc>https://codedeer.cn/2019/03/27/about-npm-install/</loc>
-    <lastmod>2019-03-31</lastmod>
+    <lastmod>2019-11-20</lastmod>
+  </url>  <url>
+    <loc>https://codedeer.cn/2019/04/28/about-iview-table/</loc>
+    <lastmod>2019-11-20</lastmod>
   </url>
 </urlset>
