@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://cboy.life/2020/01/10/my_2019/</loc>
+    <loc>https://cboy.life/blog/blog/2020/01/10/my_2019/</loc>
     <lastmod>2020-01-10</lastmod>
   </url>  <url>
-    <loc>https://cboy.life/gallery/index.html</loc>
+    <loc>https://cboy.life/blog/blog/gallery/index.html</loc>
     <lastmod>2019-11-20</lastmod>
   </url>  <url>
-    <loc>https://cboy.life/2019/10/14/react-to-print/</loc>
+    <loc>https://cboy.life/blog/blog/2019/10/14/react-to-print/</loc>
     <lastmod>2019-11-20</lastmod>
   </url>  <url>
-    <loc>https://cboy.life/2019/03/25/npm-publish/</loc>
+    <loc>https://cboy.life/blog/blog/2019/03/25/npm-publish/</loc>
     <lastmod>2019-11-20</lastmod>
   </url>  <url>
-    <loc>https://cboy.life/2019/03/16/my-life/</loc>
+    <loc>https://cboy.life/blog/blog/2019/03/16/my-life/</loc>
     <lastmod>2019-11-20</lastmod>
   </url>  <url>
-    <loc>https://cboy.life/2019/06/25/js-array-clone/</loc>
+    <loc>https://cboy.life/blog/blog/2019/06/25/js-array-clone/</loc>
     <lastmod>2019-11-20</lastmod>
   </url>  <url>
-    <loc>https://cboy.life/2019/03/09/InAntdSaveAndUploadFile/</loc>
+    <loc>https://cboy.life/blog/blog/2019/03/09/InAntdSaveAndUploadFile/</loc>
     <lastmod>2019-11-20</lastmod>
   </url>  <url>
-    <loc>https://cboy.life/2019/11/12/draggable/</loc>
+    <loc>https://cboy.life/blog/blog/2019/11/12/draggable/</loc>
     <lastmod>2019-11-20</lastmod>
   </url>  <url>
-    <loc>https://cboy.life/2019/03/27/about-npm-install/</loc>
+    <loc>https://cboy.life/blog/blog/2019/03/27/about-npm-install/</loc>
     <lastmod>2019-11-20</lastmod>
   </url>  <url>
-    <loc>https://cboy.life/2019/04/28/about-iview-table/</loc>
+    <loc>https://cboy.life/blog/blog/2019/04/28/about-iview-table/</loc>
     <lastmod>2019-11-20</lastmod>
   </url>
 </urlset>
